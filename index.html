@@ -1,243 +1,325 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akhil & Gaayathri | 13.05.2026</title>
+    
+    <!-- Premium Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Montserrat:wght@200;400;600&family=Pinyon+Script&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --accent: #C34121; /* Burnt Sienna */
+            --navy: #1A2A4E;   /* Deep Navy */
+            --cream: #FAF7F2;  /* Champagne Cream */
+            --white: #FFFFFF;
+            --glass: rgba(255, 255, 255, 0.8);
+            --transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
 
-<title>Akhil & Gaayathri | 13.05.2026</title>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;600&family=Montserrat:wght@200;400;600&family=Pinyon+Script&display=swap" rel="stylesheet">
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--cream);
+            color: var(--navy);
+            overflow-x: hidden;
+        }
 
-<style>
+        /* --- LOADING SCREEN --- */
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: var(--navy);
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: var(--white);
+            transition: transform 1s ease-in-out;
+        }
+        #loader h1 { font-family: 'Pinyon Script', cursive; font-size: 4rem; color: var(--accent); }
+        .loaded #loader { transform: translateY(-100%); }
 
-/* ===== ROOT ===== */
-:root {
-    --accent:#C34121;
-    --primary:#1A2A4E;
-    --bg:#F9F6F2;
-    --white:#fff;
-}
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            padding: 25px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(250, 247, 242, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(26, 42, 78, 0.05);
+        }
+        .logo { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; letter-spacing: 3px; font-weight: 300; }
+        .logo span { font-family: 'Pinyon Script', cursive; color: var(--accent); font-size: 2.2rem; }
 
-/* ===== GLOBAL ===== */
-*{margin:0;padding:0;box-sizing:border-box;}
-body{
-    font-family:Montserrat;
-    background:var(--bg);
-    scroll-behavior:smooth;
-}
+        .nav-links { display: flex; gap: 40px; list-style: none; }
+        .nav-links a { 
+            text-decoration: none; color: var(--navy); font-size: 0.7rem; 
+            text-transform: uppercase; letter-spacing: 2px; font-weight: 600;
+            cursor: pointer; transition: 0.3s;
+        }
+        .nav-links a:hover { color: var(--accent); }
 
-/* ===== NAV ===== */
-nav{
-    position:fixed;
-    width:100%;
-    padding:20px 5%;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    background:rgba(255,255,255,0.7);
-    backdrop-filter:blur(10px);
-    z-index:1000;
-}
-.logo{font-family:'Cormorant Garamond';font-size:1.8rem;}
-.logo span{color:var(--accent);}
+        .btn-rsvp {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .btn-rsvp:hover { transform: scale(1.05); background: var(--navy); }
 
-.nav-links{
-    display:flex;
-    gap:30px;
-    list-style:none;
-}
-.nav-links a{
-    cursor:pointer;
-    font-size:0.8rem;
-}
-.nav-links a:hover{color:var(--accent);}
+        /* --- PAGE STRUCTURE --- */
+        .page-sheet { display: none; padding-top: 100px; min-height: 100vh; animation: pageIn 1s ease; }
+        @keyframes pageIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-.rsvp-btn{
-    background:var(--primary);
-    color:white;
-    padding:10px 25px;
-    border:none;
-    cursor:pointer;
-}
+        /* --- HERO SECTION --- */
+        .hero { text-align: center; padding: 60px 5%; }
+        .hero-badge { font-size: 0.8rem; letter-spacing: 5px; color: var(--accent); text-transform: uppercase; margin-bottom: 20px; display: block; }
+        .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 8vw, 6.5rem); font-weight: 300; line-height: 1; margin-bottom: 30px; }
+        .hero h1 i { font-family: 'Pinyon Script', cursive; color: var(--accent); font-style: normal; text-transform: none; }
 
-/* ===== PAGES ===== */
-.page-sheet{
-    display:none;
-    min-height:100vh;
-    padding-top:100px;
-    opacity:0;
-    transform:translateY(20px);
-}
+        .countdown-container {
+            display: flex; justify-content: center; gap: 30px; margin: 40px 0;
+        }
+        .count-item { text-align: center; }
+        .count-num { font-size: 2.5rem; font-family: 'Cormorant Garamond'; display: block; color: var(--accent); }
+        .count-lab { font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0.6; }
 
-/* ===== HERO ===== */
-.hero{
-    display:flex;
-    min-height:90vh;
-}
-.hero-text{flex:1;padding:8%;}
-.hero-img{
-    flex:1;
-    background:url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=2000') center/cover;
-}
+        .main-img { 
+            width: 100%; max-width: 1000px; height: 600px; 
+            object-fit: cover; border-radius: 4px; 
+            box-shadow: 0 40px 80px rgba(0,0,0,0.1);
+            margin: 40px 0;
+        }
 
-.hero-text h1{
-    font-family:'Cormorant Garamond';
-    font-size:4rem;
-}
-.hero-text span{color:var(--accent);}
+        /* --- MODERN GRID --- */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; padding: 60px 6%; }
+        .luxury-card {
+            background: var(--white);
+            padding: 60px 40px;
+            text-align: center;
+            border-radius: 4px;
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: var(--transition);
+        }
+        .luxury-card:hover { transform: translateY(-15px); box-shadow: 0 30px 60px rgba(26, 42, 78, 0.1); }
+        .luxury-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; margin-bottom: 20px; font-weight: 300; }
+        .luxury-card p { line-height: 1.8; opacity: 0.8; font-size: 0.95rem; }
 
-/* ===== CARDS ===== */
-.grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-    gap:30px;
-    padding:50px;
-}
-.card{
-    background:white;
-    padding:30px;
-    box-shadow:0 10px 30px rgba(0,0,0,0.05);
-    transition:0.3s;
-}
-.card:hover{transform:translateY(-10px);}
+        /* --- STORY SECTION --- */
+        .story-container { max-width: 800px; margin: 0 auto; text-align: center; padding: 100px 20px; }
+        .story-container h2 { font-family: 'Pinyon Script', cursive; font-size: 4.5rem; color: var(--accent); }
 
-/* ===== MAP ===== */
-.map{height:400px;margin:30px;}
-iframe{width:100%;height:100%;border:none;}
+        /* --- RSVP FORM --- */
+        .rsvp-card { max-width: 600px; margin: 60px auto; background: var(--white); padding: 50px; border-radius: 12px; }
+        .form-group { margin-bottom: 25px; text-align: left; }
+        .form-group label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; display: block; margin-bottom: 10px; }
+        .form-group input, .form-group select { 
+            width: 100%; padding: 15px; border: none; border-bottom: 1px solid #ddd; 
+            background: transparent; outline: none; transition: 0.3s;
+        }
+        .form-group input:focus { border-color: var(--accent); }
 
-/* ===== FOOTER ===== */
-footer{
-    text-align:center;
-    padding:60px;
-    background:var(--primary);
-    color:white;
-}
+        /* --- MAP --- */
+        .map-box { height: 500px; width: 100%; border-radius: 8px; filter: grayscale(100%) contrast(1.2); transition: 0.5s; border: 10px solid var(--white); box-shadow: var(--shadow); }
+        .map-box:hover { filter: grayscale(0%); }
 
-/* ===== MOBILE ===== */
-@media(max-width:768px){
-.hero{flex-direction:column;}
-.nav-links{display:none;}
-}
+        /* --- FOOTER --- */
+        footer { background: var(--navy); color: var(--white); padding: 100px 5%; text-align: center; }
+        .footer-logo { font-family: 'Pinyon Script', cursive; font-size: 5rem; color: var(--accent); margin-bottom: 20px; }
 
-</style>
+        /* --- WHATSAPP FLOATER --- */
+        .wa-float {
+            position: fixed; bottom: 30px; right: 30px;
+            background: #25D366; color: white; padding: 15px 25px;
+            border-radius: 50px; text-decoration: none; font-weight: 600;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
+            display: flex; align-items: center; gap: 10px; z-index: 999;
+            transition: 0.3s;
+        }
+        .wa-float:hover { transform: scale(1.1); }
 
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 3.5rem; }
+            .main-img { height: 400px; }
+            .grid { padding: 20px; }
+        }
+    </style>
 </head>
-
 <body>
 
-<nav>
-<div class="logo">A<span>&</span>G</div>
-<ul class="nav-links">
-<li><a onclick="showSheet('home')">Home</a></li>
-<li><a onclick="showSheet('story')">Story</a></li>
-<li><a onclick="showSheet('travel')">Travel</a></li>
-</ul>
-<button class="rsvp-btn" onclick="showSheet('rsvp')">RSVP</button>
-</nav>
+    <!-- LUXURY LOADER -->
+    <div id="loader">
+        <h1>A & G</h1>
+        <p style="letter-spacing: 5px; font-size: 0.7rem; margin-top: 10px;">LOADING THE CELEBRATION</p>
+    </div>
 
-<!-- HOME -->
+    <!-- MODERN NAVIGATION -->
+    <nav>
+        <div class="logo" onclick="showSheet('home')">AKHIL <span>&</span> GAAYATHRI</div>
+        <ul class="nav-links">
+            <li><a onclick="showSheet('home')">Home</a></li>
+            <li><a onclick="showSheet('story')">Our Story</a></li>
+            <li><a onclick="showSheet('travel')">Travel</a></li>
+        </ul>
+        <button class="btn-rsvp" onclick="showSheet('rsvp')">RSVP</button>
+    </nav>
 
-<div id="home" class="page-sheet">
-<div class="hero">
-<div class="hero-text">
-<h1>We are getting <span>Married</span></h1>
-<p>13 May 2026 • Tirumala</p>
-</div>
-<div class="hero-img"></div>
-</div>
+    <!-- HOME PAGE -->
+    <div id="home" class="page-sheet">
+        <section class="hero">
+            <span class="hero-badge">The Wedding Celebration</span>
+            <h1>We're Tying <i>the</i> Knot</h1>
+            
+            <div class="countdown-container">
+                <div class="count-item"><span class="count-num" id="days">00</span><span class="count-lab">Days</span></div>
+                <div class="count-item"><span class="count-num" id="hours">00</span><span class="count-lab">Hours</span></div>
+                <div class="count-item"><span class="count-num" id="mins">00</span><span class="count-lab">Mins</span></div>
+            </div>
 
-<div class="grid">
-<div class="card">
-<h3>Ceremony</h3>
-<p>9:00 AM - Hampi Hall</p>
-</div>
-<div class="card">
-<h3>Reception</h3>
-<p>7:00 PM - Daspalla</p>
-</div>
-</div>
+            <p style="letter-spacing: 3px; font-size: 0.9rem; margin-top: 20px;">MAY 13, 2026 • TIRUMALA, AP</p>
+            
+            <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=2000" class="main-img" alt="Wedding">
+        </section>
 
-<div class="map">
-<iframe src="https://maps.google.com/maps?q=Hampi%20Functional%20Hall%20Tirumala&output=embed"></iframe>
-</div>
-</div>
+        <div class="grid">
+            <div class="luxury-card">
+                <h3>The Ceremony</h3>
+                <p>Wednesday, May 13th, 2026</p>
+                <p>9:00 AM Onwards</p>
+                <p><strong>Hampi Functional Hall</strong><br>Tirumala, Andhra Pradesh</p>
+            </div>
+            <div class="luxury-card">
+                <h3>The Reception</h3>
+                <p>Wednesday, May 13th, 2026</p>
+                <p>7:00 PM Onwards</p>
+                <p><strong>Hotel Daspalla</strong><br>Visakhapatnam, Andhra Pradesh</p>
+            </div>
+        </div>
 
-<!-- STORY -->
+        <section class="section-padding container" style="padding: 100px 6%;">
+            <h2 style="text-align:center; font-family:'Cormorant Garamond'; font-size: 3rem; margin-bottom: 40px;">The Venue</h2>
+            <iframe class="map-box" src="https://www.google.com/maps?q=Hampi Functional Hall Tirumala&output=embed"></iframe>
+        </section>
+    </div>
 
-<div id="story" class="page-sheet">
-<div class="grid">
-<div class="card">
-<h2>Our Story</h2>
-<p>From a simple match to forever ❤️</p>
-</div>
-</div>
-</div>
+    <!-- STORY PAGE -->
+    <div id="story" class="page-sheet">
+        <div class="story-container">
+            <h2>Our Story</h2>
+            <p style="margin-top: 30px; font-size: 1.2rem; font-family: 'Cormorant Garamond'; line-height: 2;">
+                It didn’t start with a meet-cute in a library. It started with an internet connection, a bit of courage, and a match that would set the course for the rest of our lives. 
+                From five countries visited together to building a home we love, every step has been an adventure. 
+                <br><br>
+                Now, we are ready for our biggest journey yet.
+            </p>
+            <div style="margin-top: 50px;">
+                <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1000" style="width: 100%; border-radius: 4px;" alt="Adventure">
+            </div>
+        </div>
+    </div>
 
-<!-- TRAVEL -->
+    <!-- TRAVEL PAGE -->
+    <div id="travel" class="page-sheet">
+        <section class="section-padding container" style="padding: 80px 6%; text-align: center;">
+            <h2 style="font-family:'Cormorant Garamond'; font-size: 3rem; margin-bottom: 50px;">Travel & Stay</h2>
+            <div class="grid" style="padding: 0;">
+                <div class="luxury-card">
+                    <h3>Accommodation</h3>
+                    <p>• Hotel Daspalla (Reception Venue)<br>• Fortune Select Grand Ridge<br>• Marasa Sarovar Premiere</p>
+                </div>
+                <div class="luxury-card">
+                    <h3>Nearby Sights</h3>
+                    <p>• Tirumala Temple Darshan<br>• RK Beach, Visakhapatnam<br>• Local Temple Culinary Tour</p>
+                </div>
+            </div>
+        </section>
+    </div>
 
-<div id="travel" class="page-sheet">
-<div class="grid">
-<div class="card">
-<h2>Travel Info</h2>
-<p>Hotels, places and help</p>
-</div>
-</div>
-</div>
+    <!-- RSVP PAGE -->
+    <div id="rsvp" class="page-sheet">
+        <div class="rsvp-card">
+            <h2 style="font-family: 'Cormorant Garamond'; font-size: 3rem; text-align: center; margin-bottom: 30px;">Will You Join Us?</h2>
+            <form>
+                <div class="form-group">
+                    <label>Guest Name</label>
+                    <input type="text" placeholder="Enter your full name">
+                </div>
+                <div class="form-group">
+                    <label>Attendance</label>
+                    <select>
+                        <option>Joyfully Accept</option>
+                        <option>Regretfully Decline</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Number of Guests</label>
+                    <input type="number" value="1">
+                </div>
+                <button type="submit" class="btn-rsvp" style="width: 100%; height: 60px;">SEND RSVP</button>
+            </form>
+        </div>
+    </div>
 
-<!-- RSVP -->
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-logo">See you there!</div>
+        <p style="letter-spacing: 5px; opacity: 0.6; font-size: 0.8rem;">MAY 13, 2026 • AKHIL & GAAYATHRI</p>
+        <p style="margin-top: 30px; font-size: 0.7rem; opacity: 0.4;">© 2026 POWERED BY LOVE</p>
+    </footer>
 
-<div id="rsvp" class="page-sheet">
-<div class="grid">
-<div class="card">
-<h2>RSVP</h2>
-<input placeholder="Name" style="width:100%;padding:10px;margin-top:10px;">
-<button class="rsvp-btn" style="margin-top:10px;width:100%;">Submit</button>
-</div>
-</div>
-</div>
+    <!-- WHATSAPP FLOATER -->
+    <a href="https://wa.me/919618760508" class="wa-float" target="_blank">
+        RSVP via WhatsApp 💬
+    </a>
 
-<footer>
-<h2>See you there 💍</h2>
-</footer>
+    <script>
+        // SHEET LOGIC
+        function showSheet(id) {
+            document.querySelectorAll('.page-sheet').forEach(s => s.style.display = 'none');
+            const target = document.getElementById(id);
+            target.style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
 
-<script>
+        // LOADER TIMEOUT
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.body.classList.add('loaded');
+                showSheet('home');
+            }, 2500);
+        });
 
-function showSheet(id){
+        // LIVE COUNTDOWN
+        const weddingDate = new Date("May 13, 2026 09:00:00").getTime();
+        
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const diff = weddingDate - now;
 
-const sheets=document.querySelectorAll('.page-sheet');
+            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
 
-// fade out
-sheets.forEach(s=>{
-if(s.style.display==='block'){
-s.style.opacity='0';
-s.style.transform='translateY(20px)';
-}
-});
+            document.getElementById('days').innerText = d < 10 ? '0'+d : d;
+            document.getElementById('hours').innerText = h < 10 ? '0'+h : h;
+            document.getElementById('mins').innerText = m < 10 ? '0'+m : m;
+        }
 
-setTimeout(()=>{
-
-// hide all
-sheets.forEach(s=>s.style.display='none');
-
-// show target
-const t=document.getElementById(id);
-t.style.display='block';
-
-setTimeout(()=>{
-t.style.transition='all 0.5s ease';
-t.style.opacity='1';
-t.style.transform='translateY(0)';
-},50);
-
-},300);
-
-window.scrollTo(0,0);
-}
-
-window.onload=()=>showSheet('home');
-
-</script>
-
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
 </body>
 </html>
