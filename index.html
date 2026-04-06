@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akhil & Gaayathri | Wedding Celebration</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600&family=Pinyon+Script&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --burnt-orange: #C34121;
+            --soft-pink: #FDF0F0;
+            --deep-blue: #2C4A9E;
+            --white: #FFFFFF;
+            --black: #000000;
+            --glass-border: rgba(44, 74, 158, 0.1);
+            --transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        } 
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--soft-pink);
+            color: var(--black);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 5%; background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px); position: fixed; top: 0; width: 100%; z-index: 1000;
+            border-bottom: 1px solid var(--glass-border);
+        }
+        .logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: bold; cursor: pointer; }
+        .logo span { color: var(--burnt-orange); }
+        .nav-links { display: flex; list-style: none; gap: 25px; }
+        .nav-links a { text-decoration: none; color: var(--black); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: 0.3s; }
+        .nav-links a:hover, .nav-links a.active-link { color: var(--burnt-orange); font-weight: 600; }
+        .rsvp-nav { background: var(--burnt-orange); color: white; border: none; padding: 10px 30px; border-radius: 25px; cursor: pointer; font-weight: 600; }
+
+        /* --- SPA SHEET LOGIC --- */
+        .page-sheet { display: none; padding-top: 100px; animation: slideUpFade 0.7s ease-out; min-height: 100vh; }
+        @keyframes slideUpFade {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- COMPONENTS --- */
+        .container { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
+        .hero { text-align: center; padding: 60px 20px; }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 10vw, 7.5rem); color: var(--burnt-orange); line-height: 0.9; text-transform: uppercase; }
+        .hero h1 span { font-family: 'Pinyon Script', cursive; text-transform: none; font-size: 1.1em; }
+        
+        .badge { padding: 6px 16px; background: rgba(195, 65, 33, 0.1); color: var(--burnt-orange); border-radius: 100px; font-size: 0.8rem; font-weight: 700; display: inline-block; margin-bottom: 20px; }
+        
+        .hero-img-container { width: 90%; max-width: 1000px; margin: 40px auto; }
+        .hero-img-container img { width: 100%; box-shadow: 0 30px 60px rgba(0,0,0,0.1); border-radius: 8px; }
+
+        /* --- STYLIZED CARDS --- */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin: 40px 0; }
+        .card { background: var(--white); padding: 45px; border-radius: 24px; border: 1px solid var(--glass-border); transition: 0.3s; }
+        .card:hover { transform: translateY(-10px); border-color: var(--burnt-orange); }
+        .card h3 { font-family: 'Playfair Display', serif; color: var(--deep-blue); margin-bottom: 15px; font-size: 1.8rem; }
+
+        .chapter-card { background: var(--burnt-orange); color: white; transform: rotate(-1.5deg); }
+        .chapter-card h2 { font-family: 'Playfair Display', serif; font-size: 3rem; line-height: 1.1; margin-bottom: 20px; }
+        .chapter-card h2 span { font-family: 'Pinyon Script', cursive; font-size: 1.3em; }
+
+        /* --- BUTTONS --- */
+        .btn-outline {
+            padding: 14px 35px; border: 1px solid var(--burnt-orange); color: var(--burnt-orange);
+            text-decoration: none; border-radius: 50px; font-weight: 600; display: inline-block;
+            cursor: pointer; transition: 0.3s; background: transparent;
+        }
+        .btn-outline:hover { background: var(--burnt-orange); color: white; }
+
+        /* --- TRAVEL SECTION --- */
+        .travel-summary { background: white; padding: 60px; border-radius: 30px; text-align: center; margin-top: 50px; }
+        .travel-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin: 40px 0; text-align: left; }
+        .travel-meta h4 { color: var(--burnt-orange); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+
+        footer { background: var(--burnt-orange); color: white; text-align: center; padding: 100px 20px; margin-top: 80px; }
+        .footer-logo { font-family: 'Pinyon Script', cursive; font-size: 7rem; line-height: 0.8; margin-bottom: 20px; }
+
+        @media (max-width: 850px) {
+            .nav-links { display: none; }
+            .travel-meta { grid-template-columns: 1fr; }
+            .chapter-card { transform: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo" onclick="showSheet('home')">A<span>&</span>G</div>
+        <ul class="nav-links">
+            <li><a id="link-home" onclick="showSheet('home')">Home</a></li>
+            <li><a id="link-story" onclick="showSheet('story')">Our Story</a></li>
+            <li><a id="link-travel" onclick="showSheet('travel')">Travel</a></li>
+        </ul>
+        <button class="rsvp-nav" onclick="showSheet('rsvp')">RSVP</button>
+    </nav>
+
+    <div id="home" class="page-sheet">
+        <section class="hero">
+            <span class="badge">WEDNESDAY, MAY 13, 2026</span>
+            <h1>We're Tying <br>The <span>Knot!</span></h1>
+            <p style="font-weight: 600; color: #666; margin-top: 15px;">Hampi Functional Hall, Tirumala | 9:00 AM</p>
+            
+            <div class="hero-img-container">
+                <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=2000" alt="Wedding Couple">
+            </div>
+            
+            <h2 style="font-family:'Playfair Display'; font-size: 2.5rem; color: var(--deep-blue);">Akhil & Gaayathri are getting Married</h2>
+        </section>
+
+        <div class="container">
+            <div class="grid">
+                <div class="card">
+                    <h3>CEREMONY</h3>
+                    <p><strong>Wednesday, May 13</strong></p>
+                    <p>9:00 AM @ Hampi Functional Hall, Tirumala</p>
+                </div>
+                <div class="card">
+                    <h3>RECEPTION</h3>
+                    <p><strong>Wednesday, May 13</strong></p>
+                    <p>7:00 PM @ Hotel Daspalla, Visakhapatnam</p>
+                </div>
+            </div>
+
+            <div class="chapter-card card" style="text-align: center; margin: 80px 0;">
+                <h2>Our Next Chapter is <br><span>About to Begin</span></h2>
+                <p style="margin-bottom: 30px; font-size: 1.1rem;">It started with an internet connection, a bit of courage, and a match that set our course. We've built a home we love, and the journey has only just begun.</p>
+                <button class="btn-outline" style="border-color: white; color: white;" onclick="showSheet('story')">READ FULL STORY</button>
+            </div>
+
+            <div style="text-align: center; padding: 40px 0;">
+                <h2 style="font-family:'Playfair Display'; font-size: 3rem; color: var(--burnt-orange);">Registry</h2>
+                <p style="max-width: 600px; margin: 20px auto 30px;">Your presence is the greatest gift. However, if you'd like to help us start our life, we've created a registry for your convenience.</p>
+                <button class="btn-outline">VIEW REGISTRY</button>
+            </div>
+
+            <section>
+    <h2 style="text-align:center;color:var(--deep-blue)">Find Us Here</h2>
+
+    <div class="map-container">
+        <iframe 
+            src="https://www.google.com/maps?q=Hampi Functional Hall Tirumala&output=embed"
+            width="100%" 
+            height="100%" 
+            style="border:0;"
+            loading="lazy">
+        </iframe>
+    </div>
+</section>
+
+
+    <div id="story" class="page-sheet">
+        <div class="container" style="text-align: center;">
+            <h2 style="font-family:'Playfair Display'; font-size: 3.5rem; color: var(--burnt-orange); margin-bottom: 40px;">How One Right Swipe Changed Everything</h2>
+            <div class="card" style="text-align: left; max-width: 800px; margin: 0 auto; line-height: 2;">
+                <p>For those who don't know the whole story, it didn't start with a meet-cute in a library. It started with an internet connection, a bit of courage, and a match that would set the course for the rest of our lives.</p>
+                <br>
+                <p>Two apartments, five countries visited, and one very spoiled dog later, our adventure has been the best of our lives. We've built a home and a life we love, and the journey has only just begun.</p>
+            </div>
+            <button class="btn-outline" style="margin-top: 40px;" onclick="showSheet('home')">Back to Home</button>
+        </div>
+    </div>
+
+    <div id="travel" class="page-sheet">
+        <div class="container">
+            <h2 style="font-family:'Playfair Display'; font-size: 3.5rem; text-align: center; color: var(--burnt-orange);">Plan Your Trip</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Where to Stay</h3>
+                    <p>• Hotel Daspalla (Reception Venue)<br>• Fortune Select Grand Ridge<br>• Marasa Sarovar Premiere</p>
+                </div>
+                <div class="card">
+                    <h3>Things to Do</h3>
+                    <p>• Tirumala Temple Darshan<br>• Shopping at Gandhi Road<br>• Local Laddu Tasting</p>
+                </div>
+            </div>
+            <div class="card" style="text-align: center;">
+                <h3>Need Help?</h3>
+                <p>If you have trouble booking, reach out to us!</p>
+                <p>Akhil: 123-456-7890 | Gaayathri: 123-456-7890</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="rsvp" class="page-sheet">
+        <div class="container" style="text-align: center;">
+            <h2 style="font-family:'Playfair Display'; font-size: 3.5rem; color: var(--burnt-orange);">RSVP</h2>
+            <p>Will you be joining us? Please let us know by April 1st.</p>
+            <div class="card" style="max-width: 500px; margin: 40px auto; text-align: left;">
+                <form>
+                    <label style="display:block; margin-bottom: 10px; font-weight: 600;">Your Name</label>
+                    <input type="text" placeholder="Enter name" style="width: 100%; padding: 15px; border-radius: 10px; border: 1px solid #ddd; margin-bottom: 20px;">
+                    
+                    <label style="display:block; margin-bottom: 10px; font-weight: 600;">Will you attend?</label>
+                    <select style="width: 100%; padding: 15px; border-radius: 10px; border: 1px solid #ddd; margin-bottom: 20px;">
+                        <option>Joyfully Accept</option>
+                        <option>Regretfully Decline</option>
+                    </select>
+                    
+                    <button type="submit" class="rsvp-nav" style="width: 100%; padding: 15px;">Send Response</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-logo">See you there!</div>
+        <div style="font-size: 2rem; font-weight: 800; margin-bottom: 10px;">A & G</div>
+        <p>Wednesday, May 13, 2026</p>
+        <p>Hampi Functional Hall, Tirumala</p>
+        <p style="font-size: 0.75rem; opacity: 0.7; margin-top: 30px;">© 2026 BY AKHIL & GAAYATHRI. POWERED BY LOVE.</p>
+    </footer>
+
+    <script>
+        function showSheet(id) {
+            // Hide all sheets
+            const sheets = document.querySelectorAll('.page-sheet');
+            sheets.forEach(sheet => sheet.style.display = 'none');
+
+            // Show selected sheet
+            const target = document.getElementById(id);
+            if(target) target.style.display = 'block';
+
+            // Update active state in nav
+            const links = document.querySelectorAll('.nav-links a');
+            links.forEach(link => link.classList.remove('active-link'));
+            const activeLink = document.getElementById('link-' + id);
+            if(activeLink) activeLink.classList.add('active-link');
+
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Default to Home on load
+        window.onload = () => showSheet('home');
+    </script>
+</body>
+</html>
