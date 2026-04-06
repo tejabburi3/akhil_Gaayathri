@@ -59,31 +59,28 @@
 
         /* --- HERO SECTION --- */
         .hero { text-align: center; padding: 40px 5% 80px; }
-        .save-the-date-txt { letter-spacing: 8px; text-transform: uppercase; font-size: 0.8rem; color: var(--accent); margin-bottom: 20px; display: block; }
-        
-        .ring-container { width: 100%; max-width: 500px; margin: 0 auto; position: relative; }
-        .ring-img { 
-            width: 100%; border-radius: 250px 250px 0 0; 
-            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
-            border: 1px solid rgba(195, 65, 33, 0.1);
-        }
-
         .hero h1 { 
             font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 8vw, 5rem); 
-            font-weight: 300; line-height: 1; margin-top: -30px; position: relative; z-index: 2;
+            font-weight: 300; line-height: 1; position: relative; z-index: 2;
         }
-        .hero h1 i { font-family: 'Pinyon Script', cursive; color: var(--accent); font-style: normal; display: block; font-size: 0.8em; margin: -10px 0; }
+        .hero h1 i { font-family: 'Pinyon Script', cursive; color: var(--accent); font-style: normal; display: inline-block; padding: 0 10px; }
+
+        .main-img { 
+            width: 100%; max-width: 600px; height: auto;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+        }
 
         /* --- COMPONENTS --- */
-        .countdown { display: flex; justify-content: center; gap: 30px; margin: 40px 0; }
-        .count-num { font-size: 2.5rem; font-family: 'Cormorant Garamond'; color: var(--accent); line-height: 1; }
+        .countdown-container { display: flex; justify-content: center; gap: 40px; margin: 30px 0; }
+        .count-item { text-align: center; }
+        .count-num { font-size: 2.5rem; font-family: 'Cormorant Garamond'; color: var(--accent); display: block; line-height: 1; }
         .count-lab { font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0.6; }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin: 40px 0; }
-        .card { background: var(--white); padding: 45px; border-radius: 4px; text-align: center; transition: var(--transition); }
-        .card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 0; margin: 40px 0; }
+        .luxury-card { background: var(--white); padding: 60px 40px; text-align: center; transition: var(--transition); }
+        .luxury-card h3 { font-family: 'Cormorant Garamond'; font-size: 2rem; font-weight: 400; }
 
-        .hint-section { background: var(--accent); color: white; padding: 80px 10%; text-align: center; margin: 60px 0; }
+        .hint-section { background: var(--accent); color: white; padding: 80px 10%; text-align: center; }
         .hint-section h2 { font-family: 'Cormorant Garamond'; font-size: 3rem; margin-bottom: 20px; font-weight: 300; }
 
         .btn-outline {
@@ -93,7 +90,7 @@
         }
         .btn-outline:hover { background: var(--accent); color: white; }
 
-        /* --- TIMELINE (Story Page) --- */
+        /* --- TIMELINE --- */
         .timeline { position: relative; max-width: 800px; margin: 60px auto; padding: 40px 0; }
         .timeline::before { content: ''; position: absolute; left: 50%; width: 1px; height: 100%; background: rgba(195, 65, 33, 0.3); }
         .time-item { margin-bottom: 80px; position: relative; width: 50%; padding: 0 40px; }
@@ -106,7 +103,7 @@
             .nav-links { display: none; }
             .timeline::before { left: 20px; }
             .time-item { width: 100%; text-align: left !important; left: 0; padding-left: 50px; }
-            .hero h1 { font-size: 3.5rem; }
+            .luxury-card { border-left: none !important; border-top: 1px solid #eee; }
         }
     </style>
 </head>
@@ -123,62 +120,59 @@
     </nav>
 
     <!-- HOME PAGE -->
-<div id="home" class="page-sheet">
-    <section class="hero" style="padding-top: 80px;">
-        <span class="hero-badge" style="border-bottom: 1px solid var(--accent); display: inline-block; padding-bottom: 5px; margin-bottom: 30px;">
-            The Wedding Celebration
-        </span>
-        
-        <h1 style="margin-bottom: 10px;">Akhil <i>&</i> Gaayathri</h1>
-        <p style="font-family: 'Cormorant Garamond'; font-size: 1.5rem; font-style: italic; opacity: 0.7; margin-bottom: 40px;">
-            Together with their families, invite you to celebrate
-        </p>
-        
-        <div class="countdown-container">
-            <div class="count-item"><span class="count-num" id="days">00</span><span class="count-lab">Days</span></div>
-            <div class="count-item"><span class="count-num" id="hours">00</span><span class="count-lab">Hours</span></div>
-            <div class="count-item"><span class="count-num" id="mins">00</span><span class="count-lab">Mins</span></div>
-        </div>
-
-        <div style="position: relative; display: inline-block; margin: 40px 0;">
-            <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=2000" 
-                 class="main-img" 
-                 alt="Wedding"
-                 style="border-radius: 250px 250px 0 0; object-position: center 20%;"> <div style="position: absolute; top: 20px; left: 20px; right: -20px; bottom: -20px; border: 1px solid var(--accent); z-index: -1;"></div>
-        </div>
-
-        <p style="letter-spacing: 5px; font-size: 1rem; margin-top: 40px; font-weight: 600;">MAY 13, 2026 • TIRUMALA, AP</p>
-    </section>
-
-    <div class="grid" style="background: white; margin-top: 60px;">
-        <div class="luxury-card" style="border: none;">
-            <span style="color: var(--accent); font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase;">The Ceremony</span>
-            <h3 style="margin: 15px 0;">Muhurtham</h3>
-            <p>13th May, 2026 | 05:00 AM</p>
-            <p><strong>Hampi Functional Hall</strong><br>Tirumala, Andhra Pradesh</p>
-        </div>
-        <div class="luxury-card" style="border: none; border-left: 1px solid #eee;">
-            <span style="color: var(--accent); font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase;">The Celebration</span>
-            <h3 style="margin: 15px 0;">Reception</h3>
-            <p>21st May, 2026 | 07:00 PM</p>
-            <p><strong>Hotel Daspalla</strong><br>Visakhapatnam, Andhra Pradesh</p>
-        </div>
-    </div>
-</div>
-
-            <!-- Story Hint -->
-            <div class="hint-section">
-                <h2>10 Years in the Making</h2>
-                <p style="margin-bottom: 30px; opacity: 0.9; max-width: 600px; margin-inline: auto;">From engineering classmates to long-distance survivors. Our journey has been a decade of love and growth.</p>
-                <button class="btn-outline" style="border-color: white; color: white;" onclick="showSheet('story')">Read Full Story</button>
+    <div id="home" class="page-sheet">
+        <section class="hero">
+            <span class="hero-badge" style="border-bottom: 1px solid var(--accent); display: inline-block; padding-bottom: 5px; margin-bottom: 30px; letter-spacing: 3px; font-size: 0.7rem; text-transform: uppercase;">
+                The Wedding Celebration
+            </span>
+            
+            <h1>Akhil <i>&</i> Gaayathri</h1>
+            <p style="font-family: 'Cormorant Garamond'; font-size: 1.5rem; font-style: italic; opacity: 0.7; margin-bottom: 40px;">
+                Together with their families, invite you to celebrate
+            </p>
+            
+            <div class="countdown-container">
+                <div class="count-item"><span class="count-num" id="days">00</span><span class="count-lab">Days</span></div>
+                <div class="count-item"><span class="count-num" id="hours">00</span><span class="count-lab">Hours</span></div>
+                <div class="count-item"><span class="count-num" id="mins">00</span><span class="count-lab">Mins</span></div>
             </div>
 
-            <!-- Travel Hint -->
-            <div style="text-align: center; padding: 40px 0;">
-                <h2 style="font-family: 'Cormorant Garamond'; font-size: 2.5rem; margin-bottom: 20px;">Coming from afar?</h2>
-                <p style="margin-bottom: 30px; opacity: 0.7;">We've organized stays and travel guides for your convenience.</p>
-                <button class="btn-outline" onclick="showSheet('travel')">View Travel Info</button>
+            <div style="position: relative; display: inline-block; margin: 40px 0;">
+                <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=2000" 
+                     class="main-img" 
+                     alt="Wedding"
+                     style="border-radius: 250px 250px 0 0; display: block;"> 
+                <div style="position: absolute; top: 20px; left: 20px; right: -20px; bottom: -20px; border: 1px solid var(--accent); z-index: -1;"></div>
             </div>
+
+            <p style="letter-spacing: 5px; font-size: 1rem; margin-top: 40px; font-weight: 600;">MAY 13, 2026 • TIRUMALA, AP</p>
+        </section>
+
+        <div class="grid" style="background: white;">
+            <div class="luxury-card">
+                <span style="color: var(--accent); font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase;">The Ceremony</span>
+                <h3 style="margin: 15px 0;">Muhurtham</h3>
+                <p>13th May, 2026 | 05:00 AM</p>
+                <p><strong>Hampi Functional Hall</strong><br>Tirumala, Andhra Pradesh</p>
+            </div>
+            <div class="luxury-card" style="border-left: 1px solid #eee;">
+                <span style="color: var(--accent); font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase;">The Celebration</span>
+                <h3 style="margin: 15px 0;">Reception</h3>
+                <p>21st May, 2026 | 07:00 PM</p>
+                <p><strong>Hotel Daspalla</strong><br>Visakhapatnam, Andhra Pradesh</p>
+            </div>
+        </div>
+
+        <div class="hint-section">
+            <h2>10 Years in the Making</h2>
+            <p style="margin-bottom: 30px; opacity: 0.9; max-width: 600px; margin-inline: auto;">From engineering classmates to long-distance survivors. Our journey has been a decade of love and growth.</p>
+            <button class="btn-outline" style="border-color: white; color: white;" onclick="showSheet('story')">Read Full Story</button>
+        </div>
+
+        <div style="text-align: center; padding: 80px 20px;">
+            <h2 style="font-family: 'Cormorant Garamond'; font-size: 2.5rem; margin-bottom: 20px;">Coming from afar?</h2>
+            <p style="margin-bottom: 30px; opacity: 0.7;">We've organized stays and travel guides for your convenience.</p>
+            <button class="btn-outline" onclick="showSheet('travel')">View Travel Info</button>
         </div>
     </div>
 
@@ -186,7 +180,6 @@
     <div id="story" class="page-sheet">
         <div class="container">
             <h2 style="font-family: 'Pinyon Script', cursive; font-size: 5rem; text-align: center; color: var(--accent);">Our Journey</h2>
-            
             <div class="timeline">
                 <div class="time-item left">
                     <h4 style="color: var(--accent); letter-spacing: 2px;">2016</h4>
@@ -201,11 +194,10 @@
                 <div class="time-item left">
                     <h4 style="color: var(--accent); letter-spacing: 2px;">2026</h4>
                     <h3 style="font-family: 'Cormorant Garamond'; font-size: 2rem;">The Forever Promise</h3>
-                    <p>After a decade of shared dreams, we are finally stepping into our new life together. We can't wait to celebrate with you!</p>
+                    <p>After a decade of shared dreams, we are finally stepping into our new life together.</p>
                 </div>
             </div>
-            
-            <div style="text-align: center;"><button class="btn-outline" onclick="showSheet('home')">Back to Home</button></div>
+            <div style="text-align: center; margin-bottom: 60px;"><button class="btn-outline" onclick="showSheet('home')">Back to Home</button></div>
         </div>
     </div>
 
@@ -213,18 +205,18 @@
     <div id="travel" class="page-sheet">
         <div class="container">
             <h2 style="font-family: 'Cormorant Garamond'; font-size: 4rem; text-align: center; color: var(--accent); margin-bottom: 40px;">Travel Guide</h2>
-            <div class="grid">
-                <div class="card" style="text-align: left;">
-                    <h3 style="color: var(--accent); font-family: 'Cormorant Garamond';">The Muhurtham</h3>
+            <div class="grid" style="background: transparent;">
+                <div class="luxury-card" style="text-align: left; background: white; margin: 10px; border-radius: 8px;">
+                    <h3 style="color: var(--accent);">The Muhurtham</h3>
                     <p><strong>Tirumala</strong></p>
                     <p style="font-size: 0.9rem; margin: 15px 0;">Rooms are provided at the Hampi Functional Hall for guests attending the morning ceremony.</p>
-                    <iframe style="width: 100%; height: 250px; border:0; margin-top: 15px;" src="https://www.google.com/maps?q=Rayala Hampi Functional Hall Tirumala&output=embed" allowfullscreen="" loading="lazy"></iframe>
+                    <iframe style="width: 100%; height: 250px; border:0;" src="https://www.google.com/maps?q=Rayala Hampi Functional Hall Tirumala&output=embed" allowfullscreen="" loading="lazy"></iframe>
                 </div>
-                <div class="card" style="text-align: left;">
-                    <h3 style="color: var(--accent); font-family: 'Cormorant Garamond';">The Reception</h3>
+                <div class="luxury-card" style="text-align: left; background: white; margin: 10px; border-radius: 8px;">
+                    <h3 style="color: var(--accent);">The Reception</h3>
                     <p><strong>Visakhapatnam</strong></p>
                     <p style="font-size: 0.9rem; margin: 15px 0;">For the grand celebration in Vizag, luxury stays are arranged at Hotel Daspalla.</p>
-                    <iframe style="width: 100%; height: 250px; border:0; margin-top: 15px;" src="https://www.google.com/maps?q=Hotel Daspalla Visakhapatnam&output=embed" allowfullscreen="" loading="lazy"></iframe>
+                    <iframe style="width: 100%; height: 250px; border:0;" src="https://www.google.com/maps?q=Hotel Daspalla Visakhapatnam&output=embed" allowfullscreen="" loading="lazy"></iframe>
                 </div>
             </div>
         </div>
@@ -233,7 +225,7 @@
     <!-- RSVP PAGE -->
     <div id="rsvp" class="page-sheet">
         <div class="container" style="text-align: center;">
-            <div class="card" style="max-width: 600px; margin: 0 auto; padding: 60px;">
+            <div class="luxury-card" style="max-width: 600px; margin: 0 auto; padding: 60px; border-radius: 8px;">
                 <h2 style="font-family: 'Cormorant Garamond'; font-size: 3rem; margin-bottom: 20px;">RSVP</h2>
                 <p style="margin-bottom: 40px; opacity: 0.8;">Kindly let us know if you can make it. We would love to have you with us!</p>
                 <a href="https://wa.me/919618760508" style="text-decoration: none;">
@@ -251,12 +243,9 @@
 
     <script>
         function showSheet(id) {
-            // Hide all pages
             document.querySelectorAll('.page-sheet').forEach(s => s.style.display = 'none');
-            // Show selected page
             document.getElementById(id).style.display = 'block';
             
-            // Update Active Nav Link
             document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
             const activeLink = document.getElementById('nav-' + id);
             if(activeLink) activeLink.classList.add('active');
@@ -264,24 +253,21 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Countdown Timer Logic
         const weddingDate = new Date("May 13, 2026 05:00:00").getTime();
-        const timer = setInterval(() => {
+        setInterval(() => {
             const now = new Date().getTime();
             const diff = weddingDate - now;
 
             if (diff < 0) {
-                clearInterval(timer);
-                document.querySelector('.countdown').innerHTML = "The Adventure Begins!";
+                document.querySelector('.countdown-container').innerHTML = "The Adventure Begins!";
                 return;
             }
 
-            document.getElementById('d').innerText = Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
-            document.getElementById('h').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
-            document.getElementById('m').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+            document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+            document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+            document.getElementById('mins').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
         }, 1000);
 
-        // Set default page
         window.onload = () => showSheet('home');
     </script>
 </body>
