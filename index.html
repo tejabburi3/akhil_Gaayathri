@@ -97,11 +97,66 @@
         .count-num { font-size: 1.8rem; font-family: 'Cormorant Garamond'; color: var(--accent); display: block; font-weight: 600; }
         .count-lab { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.5; }
 
-        /* --- STORY TIMELINE --- */
-        .timeline { position: relative; padding: 20px; }
-        .timeline::before { content: ''; position: absolute; left: 30px; top: 0; bottom: 0; width: 1px; background: rgba(195, 65, 33, 0.2); }
-        .story-item { position: relative; padding-left: 40px; margin-bottom: 40px; }
-        .story-item::before { content: ''; position: absolute; left: -4px; top: 8px; width: 9px; height: 9px; background: var(--accent); border-radius: 50%; }
+        /* --- ENHANCED STORY TIMELINE --- */
+        .timeline { 
+            position: relative; 
+            padding: 40px 20px; 
+            max-width: 600px; 
+            margin: 0 auto; 
+        }
+
+        .timeline::before { 
+            content: ''; 
+            position: absolute; 
+            left: 30px; 
+            top: 0; 
+            bottom: 0; 
+            width: 1px; 
+            background: rgba(195, 65, 33, 0.2); 
+        }
+
+        .story-item { 
+            position: relative; 
+            padding-left: 60px; 
+            margin-bottom: 60px; 
+            text-align: left;
+        }
+
+        .story-item::before { 
+            content: ''; 
+            position: absolute; 
+            left: 26px; 
+            top: 8px; 
+            width: 9px; 
+            height: 9px; 
+            background: var(--accent); 
+            border-radius: 50%; 
+            z-index: 2;
+        }
+
+        .story-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin: 15px 0;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+            display: block;
+        }
+
+        .story-item h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            color: var(--navy);
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .story-item p {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: #666;
+        }
 
         /* --- TRAVEL GRID STYLES --- */
         .location-header { text-align: center; padding: 40px 20px 20px; }
@@ -220,24 +275,37 @@
         </div>
     </div>
 
+    <!-- UPDATED STORY SECTION -->
     <div id="story" class="page-sheet">
         <div class="timeline">
-            <h2 style="font-family: 'Pinyon Script', cursive; font-size: 3.5rem; color: var(--accent); text-align: center; margin-bottom: 40px;">Our Journey</h2>
+            <h2 style="font-family: 'Pinyon Script', cursive; font-size: 3.5rem; color: var(--accent); text-align: center; margin-bottom: 50px;">Our Journey</h2>
+            
+            <!-- 2016 -->
             <div class="story-item">
                 <h4>2016 — The Spark</h4>
-                <p style="font-size: 0.9rem; opacity: 0.8;">Meeting at Gayatri Vidya Parishad College. A connection that was instant between lectures and labs.</p>
+                <p>Meeting at Gayatri Vidya Parishad College. A connection that was instant between lectures and labs.</p>
+                <img src="photo_2016.jpg" alt="2016 Memory" class="story-image">
             </div>
+
+            <!-- 2018 -->
             <div class="story-item">
                 <h4>2018 — The Decision</h4>
-                <p style="font-size: 0.9rem; opacity: 0.8;">The year we realized friendship wasn't enough. We chose forever.</p>
+                <p>The year we realized friendship wasn't enough. We chose forever.</p>
+                <img src="photo_2018.jpg" alt="2018 Memory" class="story-image">
             </div>
+
+            <!-- 2023 -->
             <div class="story-item">
                 <h4>2023-2026 — Distance</h4>
-                <p style="font-size: 0.9rem; opacity: 0.8;">3 years of long distance. Miles apart, but always connected through every high and low.</p>
+                <p>3 years of long distance. Miles apart, but always connected through every high and low.</p>
+                <img src="photo_distance.jpg" alt="Long Distance Memory" class="story-image">
             </div>
+
+            <!-- 2026 -->
             <div class="story-item">
                 <h4>2026 — The Promise</h4>
-                <p style="font-size: 0.9rem; opacity: 0.8;">10 years later, we are finally coming home to each other.</p>
+                <p>10 years later, we are finally coming home to each other.</p>
+                <img src="photo_final.jpg" alt="The Promise" class="story-image">
             </div>
         </div>
     </div>
@@ -291,6 +359,7 @@
 
     <footer>
         <div style="font-family: 'Pinyon Script'; font-size: 3rem; color: var(--accent); margin-bottom: 10px;">See you there!</div>
+        <p style="letter-spacing: 3px; font-size: 0.8rem; opacity: 0.8; margin-bottom: 5px;">Contact: +91 9618760508</p>
         <p style="letter-spacing: 3px; font-size: 0.7rem; opacity: 0.5;">AKHIL & GAAYATHRI • 2026</p>
     </footer>
 
