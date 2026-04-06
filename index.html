@@ -62,21 +62,57 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         /* --- HOME / HERO --- */
-        .hero { text-align: center; padding: 60px 5%; }
-        .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 8vw, 5.5rem); font-weight: 300; line-height: 1.1; }
-        .hero h1 i { font-family: 'Pinyon Script', cursive; color: var(--accent); font-style: normal; }
-        
-        .main-img { 
-            width: 100%; max-width: 900px; height: 550px; 
-            object-fit: cover; border-radius: 4px; box-shadow: 0 30px 60px rgba(0,0,0,0.1);
-        }
+        .<section class="hero" style="padding-top: 40px;">
+    <!-- Top Label -->
+    <p style="letter-spacing: 8px; text-transform: uppercase; font-size: 0.9rem; font-weight: 400; margin-bottom: 10px; color: var(--navy);">
+        Save The Date
+    </p>
 
-        .countdown-container { display: flex; justify-content: center; gap: 25px; margin: 40px 0; }
-        .count-num { font-size: 2.2rem; font-family: 'Cormorant Garamond'; color: var(--accent); display: block; }
-        .count-lab { font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0.6; }
+    <!-- The Ring Image -->
+    <div style="width: 100%; max-width: 600px; margin: 0 auto; position: relative;">
+        <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=1000" 
+             class="hero-img" 
+             alt="Wedding Rings" 
+             style="margin: 20px 0; border-radius: 50% 50% 0 0; box-shadow: none; border: 1px solid var(--glass-border);">
+    </div>
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; padding: 60px 6%; }
-        .luxury-card { background: var(--white); padding: 50px 30px; text-align: center; border-radius: 4px; }
+    <!-- The Names -->
+    <h1 style="margin-top: -20px; position: relative; z-index: 2;">
+        Akhil <span>&</span> Gaayathri
+    </h1>
+    
+    <div style="margin-top: 20px;">
+        <span class="badge">MAY 13, 2026 • TIRUMALA</span>
+    </div>
+</section>
+
+<style>
+    /* Add this to your <style> tag to refine the look */
+    .hero h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: clamp(2.5rem, 8vw, 5.5rem);
+        color: var(--navy); /* Deep blue for a sophisticated look */
+        text-transform: uppercase;
+        letter-spacing: 4px;
+    }
+    .hero h1 span {
+        font-family: 'Pinyon Script', cursive;
+        text-transform: none;
+        color: var(--burnt-orange);
+        display: block;
+        font-size: 0.7em;
+        margin: -15px 0;
+    }
+    .badge {
+        display: inline-block;
+        padding: 8px 20px;
+        border-top: 1px solid var(--burnt-orange);
+        border-bottom: 1px solid var(--burnt-orange);
+        letter-spacing: 3px;
+        font-size: 0.8rem;
+        color: var(--burnt-orange);
+    }
+</style>
 
         /* --- TRAVEL PAGE --- */
         .travel-container { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
