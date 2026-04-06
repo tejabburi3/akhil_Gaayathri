@@ -103,8 +103,66 @@
         .story-item { position: relative; padding-left: 40px; margin-bottom: 40px; }
         .story-item::before { content: ''; position: absolute; left: -4px; top: 8px; width: 9px; height: 9px; background: var(--accent); border-radius: 50%; }
 
+        /* --- TRAVEL GRID STYLES --- */
+        .location-header { text-align: center; padding: 40px 20px 20px; }
+        .location-header h2 { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; margin-bottom: 10px; }
+        
+        .travel-grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .travel-card {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+        }
+
+        .travel-card h3 { 
+            font-family: 'Montserrat', sans-serif; 
+            font-weight: 700; 
+            font-size: 1.1rem; 
+            letter-spacing: 1px;
+            color: var(--navy);
+            margin-bottom: 8px;
+        }
+
+        .venue-title {
+            font-size: 1.1rem;
+            color: var(--navy);
+            font-weight: 400;
+            margin-bottom: 12px;
+        }
+
+        .stay-details {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        .google-map-iframe {
+            width: 100%;
+            height: 450px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
         footer { background: var(--navy); color: white; padding: 60px 20px; text-align: center; }
         .btn-wa { background: #25D366; color: white; padding: 18px 40px; text-decoration: none; border-radius: 50px; display: inline-block; font-weight: 600; margin-top: 20px; }
+
+        /* --- MOBILE RESPONSIVENESS --- */
+        @media (max-width: 992px) {
+            .travel-grid-container { grid-template-columns: 1fr; }
+            .google-map-iframe { height: 350px; }
+        }
     </style>
 </head>
 <body>
@@ -130,7 +188,6 @@
         </ul>
     </nav>
 
-    <!-- HOME PAGE -->
     <div id="home" class="page-sheet">
         <section class="hero">
             <h1 style="font-family: 'Cormorant Garamond'; font-size: 2.8rem; font-weight: 300;">Akhil <i>&</i> Gaayathri</h1>
@@ -143,7 +200,6 @@
             </div>
         </section>
 
-        <!-- STORY PREVIEW ON HOME -->
         <div class="luxury-card">
             <h4 style="font-family: 'Pinyon Script'; font-size: 2.5rem; color: var(--accent);">Our Roots</h4>
             <p style="font-size: 0.9rem; margin-top: 10px;">It all began in 2016 at <b>GVP College</b>. From the same branch and section to a decade of memories, we've grown up together.</p>
@@ -164,7 +220,6 @@
         </div>
     </div>
 
-    <!-- STORY PAGE (Detailed) -->
     <div id="story" class="page-sheet">
         <div class="timeline">
             <h2 style="font-family: 'Pinyon Script', cursive; font-size: 3.5rem; color: var(--accent); text-align: center; margin-bottom: 40px;">Our Journey</h2>
@@ -187,22 +242,45 @@
         </div>
     </div>
 
-    <!-- TRAVEL PAGE (Detailed) -->
     <div id="travel" class="page-sheet">
-        <div style="text-align: center; padding: 20px;">
-            <h2 style="font-family: 'Cormorant Garamond'; font-size: 2.5rem;">Venue Info</h2>
+        <div class="location-header">
+            <h2>Location Details</h2>
+            <p>Maps and stay details for our celebrations.</p>
         </div>
-        <div class="luxury-card" style="text-align: left;">
-            <h4 style="color: var(--accent); margin-bottom: 5px;">Tirumala Stay</h4>
-            <p style="font-size: 0.9rem;">Complimentary rooms are provided at <b>Hampi Functional Hall</b> for all guests attending the wedding. Feel free to check in early for the morning ceremony.</p>
-        </div>
-        <div class="luxury-card" style="text-align: left;">
-            <h4 style="color: var(--accent); margin-bottom: 5px;">Visakhapatnam Stay</h4>
-            <p style="font-size: 0.9rem;">For our outstation family and friends, luxury accommodation is arranged at <b>Hotel Daspalla</b> for the evening of May 21st.</p>
+
+        <div class="travel-grid-container">
+            
+            <div class="travel-card">
+                <h3>1. THE WEDDING (TIRUMALA)</h3>
+                <p class="venue-title">Hampi Functional Hall</p>
+                <p class="stay-details">
+                    <strong>Stay:</strong> Accommodations provided at the venue for early morning Muhurtham (5 AM - 9 AM).
+                </p>
+                <iframe 
+                    class="google-map-iframe" 
+                    src="https://maps.google.com/maps?q=Hampi%20Functional%20Hall%20Tirumala&t=&z=13&ie=UTF8&iwloc=&output=embed" 
+                    allowfullscreen="" 
+                    loading="lazy">
+                </iframe>
+            </div>
+
+            <div class="travel-card">
+                <h3>2. THE RECEPTION (VIZAG)</h3>
+                <p class="venue-title">Hotel Daspalla</p>
+                <p class="stay-details">
+                    <strong>Stay:</strong> Luxury stay arranged at Hotel Daspalla for guests from 7 PM onwards on May 21st.
+                </p>
+                <iframe 
+                    class="google-map-iframe" 
+                    src="https://maps.google.com/maps?q=Hotel%20Daspalla%20Visakhapatnam&t=&z=13&ie=UTF8&iwloc=&output=embed" 
+                    allowfullscreen="" 
+                    loading="lazy">
+                </iframe>
+            </div>
+
         </div>
     </div>
 
-    <!-- RSVP PAGE -->
     <div id="rsvp" class="page-sheet">
         <div style="text-align: center; padding: 80px 25px;">
             <h2 style="font-family: 'Cormorant Garamond'; font-size: 2.8rem;">Will You Join Us?</h2>
