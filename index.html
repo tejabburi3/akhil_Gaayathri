@@ -5,19 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Akhil & Gaayathri | 13.05.2026</title>
     
-    <!-- Premium Wedding Fonts -->
+    <!-- Premium Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Montserrat:wght@200;400;600&family=Pinyon+Script&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --accent: #C34121; /* Burnt Sienna */
-            --navy: #1A2A4E;   /* Deep Navy */
-            --cream: #FAF7F2;  /* Champagne Cream */
+            --accent: #C34121;
+            --navy: #1A2A4E;
+            --cream: #FAF7F2;
             --white: #FFFFFF;
-            --transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         body {
             font-family: 'Montserrat', sans-serif;
@@ -27,83 +27,114 @@
             line-height: 1.6;
         }
 
-        /* --- NAVIGATION --- */
+        /* --- MOBILE NAVIGATION --- */
         nav {
-            position: fixed; top: 0; width: 100%;
-            padding: 20px 6%; display: flex;
-            justify-content: space-between; align-items: center;
-            z-index: 1000; background: rgba(250, 247, 242, 0.95);
-            backdrop-filter: blur(15px); border-bottom: 1px solid rgba(26, 42, 78, 0.05);
+            position: fixed;
+            top: 0; width: 100%;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(250, 247, 242, 0.98);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(26, 42, 78, 0.05);
         }
-        .logo { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; letter-spacing: 2px; cursor: pointer; font-weight: 600; }
-        .logo span { font-family: 'Pinyon Script', cursive; color: var(--accent); font-size: 1.8rem; }
+        .logo { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; letter-spacing: 1px; font-weight: 600; }
+        .logo span { font-family: 'Pinyon Script', cursive; color: var(--accent); font-size: 1.5rem; }
 
-        .nav-links { display: flex; gap: 30px; list-style: none; }
+        /* Hamburger Menu */
+        .menu-btn {
+            display: block;
+            width: 30px;
+            cursor: pointer;
+            z-index: 1100;
+        }
+        .menu-btn div {
+            height: 2px;
+            background-color: var(--navy);
+            margin: 6px 0;
+            transition: 0.3s;
+        }
+
+        .nav-links {
+            position: fixed;
+            top: 0; right: -100%;
+            width: 80%; height: 100vh;
+            background: var(--white);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            list-style: none;
+            transition: var(--transition);
+            box-shadow: -10px 0 30px rgba(0,0,0,0.05);
+        }
+        .nav-links.active { right: 0; }
         .nav-links a { 
-            text-decoration: none; color: var(--navy); font-size: 0.7rem; 
-            text-transform: uppercase; letter-spacing: 2px; font-weight: 600; cursor: pointer;
-        }
-        .nav-links a:hover, .nav-links a.active { color: var(--accent); }
-
-        .btn-rsvp {
-            background: var(--accent); color: white; border: none;
-            padding: 10px 25px; font-size: 0.7rem; letter-spacing: 2px; cursor: pointer;
-            transition: var(--transition); border-radius: 2px;
+            text-decoration: none; color: var(--navy); font-size: 0.9rem; 
+            text-transform: uppercase; letter-spacing: 3px; font-weight: 600;
         }
 
         /* --- PAGE STRUCTURE --- */
-        .page-sheet { display: none; padding-top: 100px; min-height: 100vh; animation: fadeIn 0.8s ease; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .page-sheet { display: none; padding-top: 80px; min-height: 100vh; animation: fadeIn 0.6s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        .container { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
-
-        /* --- HERO SECTION --- */
-        .hero { text-align: center; padding: 40px 5% 80px; }
-        .hero h1 { 
-            font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 8vw, 5rem); 
-            font-weight: 300; line-height: 1; position: relative; z-index: 2;
+        /* --- HERO --- */
+        .hero { text-align: center; padding: 40px 20px; }
+        .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 300; line-height: 1.1; margin: 10px 0; }
+        
+        .image-wrapper {
+            position: relative;
+            margin: 30px 15px;
         }
-        .hero h1 i { font-family: 'Pinyon Script', cursive; color: var(--accent); font-style: normal; display: inline-block; padding: 0 10px; }
-
         .main-img { 
-            width: 100%; max-width: 600px; height: auto;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            width: 100%; height: 400px; 
+            object-fit: cover; border-radius: 4px;
+        }
+        .img-border {
+            position: absolute; top: 15px; left: 15px; right: -15px; bottom: -15px;
+            border: 1px solid var(--accent); z-index: -1;
         }
 
-        /* --- COMPONENTS --- */
-        .countdown-container { display: flex; justify-content: center; gap: 40px; margin: 30px 0; }
-        .count-item { text-align: center; }
-        .count-num { font-size: 2.5rem; font-family: 'Cormorant Garamond'; color: var(--accent); display: block; line-height: 1; }
-        .count-lab { font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0.6; }
+        .countdown-container { display: flex; justify-content: center; gap: 20px; margin: 30px 0; }
+        .count-num { font-size: 1.8rem; font-family: 'Cormorant Garamond'; color: var(--accent); display: block; }
+        .count-lab { font-size: 0.55rem; letter-spacing: 1px; text-transform: uppercase; opacity: 0.6; }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 0; margin: 40px 0; }
-        .luxury-card { background: var(--white); padding: 60px 40px; text-align: center; transition: var(--transition); }
-        .luxury-card h3 { font-family: 'Cormorant Garamond'; font-size: 2rem; font-weight: 400; }
-
-        .hint-section { background: var(--accent); color: white; padding: 80px 10%; text-align: center; }
-        .hint-section h2 { font-family: 'Cormorant Garamond'; font-size: 3rem; margin-bottom: 20px; font-weight: 300; }
-
-        .btn-outline {
-            padding: 12px 35px; border: 1px solid var(--accent); color: var(--accent);
-            background: transparent; text-transform: uppercase; letter-spacing: 2px;
-            font-size: 0.7rem; font-weight: 600; cursor: pointer; transition: 0.3s;
+        .luxury-card { 
+            background: var(--white); 
+            padding: 40px 25px; 
+            text-align: center; 
+            margin: 20px;
+            border-radius: 4px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
         }
-        .btn-outline:hover { background: var(--accent); color: white; }
 
-        /* --- TIMELINE --- */
-        .timeline { position: relative; max-width: 800px; margin: 60px auto; padding: 40px 0; }
-        .timeline::before { content: ''; position: absolute; left: 50%; width: 1px; height: 100%; background: rgba(195, 65, 33, 0.3); }
-        .time-item { margin-bottom: 80px; position: relative; width: 50%; padding: 0 40px; }
-        .time-item.left { text-align: right; left: 0; }
-        .time-item.right { text-align: left; left: 50%; }
+        /* --- STORY TIMELINE (Mobile) --- */
+        .timeline-container { padding: 40px 20px; position: relative; }
+        .v-line {
+            position: absolute; left: 30px; top: 100px; bottom: 40px;
+            width: 1px; background: rgba(195, 65, 33, 0.3);
+        }
+        .story-node {
+            position: relative; padding-left: 40px; margin-bottom: 50px;
+        }
+        .story-node::before {
+            content: ''; position: absolute; left: -14px; top: 5px;
+            width: 7px; height: 7px; background: var(--accent); border-radius: 50%;
+        }
 
-        footer { background: var(--navy); color: white; text-align: center; padding: 80px 20px; }
+        /* --- TRAVEL --- */
+        .map-frame { width: 100%; height: 300px; border-radius: 4px; margin-top: 15px; border: none; }
 
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .timeline::before { left: 20px; }
-            .time-item { width: 100%; text-align: left !important; left: 0; padding-left: 50px; }
-            .luxury-card { border-left: none !important; border-top: 1px solid #eee; }
+        footer { background: var(--navy); color: white; padding: 60px 20px; text-align: center; }
+
+        .btn-wa {
+            display: inline-block; background: #25D366; color: white; 
+            padding: 18px 30px; text-decoration: none; border-radius: 50px; 
+            font-weight: 600; font-size: 0.8rem; letter-spacing: 1px;
+            margin-top: 20px; box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2);
         }
     </style>
 </head>
@@ -111,25 +142,23 @@
 
     <nav>
         <div class="logo" onclick="showSheet('home')">AKHIL <span>&</span> GAAYATHRI</div>
-        <ul class="nav-links">
-            <li><a id="nav-home" onclick="showSheet('home')">Home</a></li>
-            <li><a id="nav-story" onclick="showSheet('story')">Our Story</a></li>
-            <li><a id="nav-travel" onclick="showSheet('travel')">Travel</a></li>
+        <div class="menu-btn" onclick="toggleMenu()">
+            <div></div><div></div><div></div>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a onclick="closeMenu('home')">Home</a></li>
+            <li><a onclick="closeMenu('story')">Our Story</a></li>
+            <li><a onclick="closeMenu('travel')">Travel Info</a></li>
+            <li><a onclick="closeMenu('rsvp')" style="color: var(--accent)">RSVP Now</a></li>
         </ul>
-        <button class="btn-rsvp" onclick="showSheet('rsvp')">RSVP</button>
     </nav>
 
     <!-- HOME PAGE -->
     <div id="home" class="page-sheet">
         <section class="hero">
-            <span class="hero-badge" style="border-bottom: 1px solid var(--accent); display: inline-block; padding-bottom: 5px; margin-bottom: 30px; letter-spacing: 3px; font-size: 0.7rem; text-transform: uppercase;">
-                The Wedding Celebration
-            </span>
-            
+            <span style="letter-spacing: 3px; font-size: 0.65rem; text-transform: uppercase; color: var(--accent); font-weight: 600;">The Wedding Celebration</span>
             <h1>Akhil <i>&</i> Gaayathri</h1>
-            <p style="font-family: 'Cormorant Garamond'; font-size: 1.5rem; font-style: italic; opacity: 0.7; margin-bottom: 40px;">
-                Together with their families, invite you to celebrate
-            </p>
+            <p style="font-family: 'Cormorant Garamond'; font-size: 1.1rem; font-style: italic; opacity: 0.7;">Together with their families, invite you to celebrate</p>
             
             <div class="countdown-container">
                 <div class="count-item"><span class="count-num" id="days">00</span><span class="count-lab">Days</span></div>
@@ -137,132 +166,119 @@
                 <div class="count-item"><span class="count-num" id="mins">00</span><span class="count-lab">Mins</span></div>
             </div>
 
-            <div style="position: relative; display: inline-block; margin: 40px 0;">
-                <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=2000" 
-                     class="main-img" 
-                     alt="Wedding"
-                     style="border-radius: 250px 250px 0 0; display: block;"> 
-                <div style="position: absolute; top: 20px; left: 20px; right: -20px; bottom: -20px; border: 1px solid var(--accent); z-index: -1;"></div>
+            <div class="image-wrapper">
+                <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=2000" class="main-img" alt="Wedding">
+                <div class="img-border"></div>
             </div>
 
-            <p style="letter-spacing: 5px; font-size: 1rem; margin-top: 40px; font-weight: 600;">MAY 13, 2026 • TIRUMALA, AP</p>
+            <p style="letter-spacing: 4px; font-size: 0.8rem; font-weight: 600; margin-top: 20px;">MAY 13, 2026 • TIRUMALA, AP</p>
         </section>
 
-        <div class="grid" style="background: white;">
-            <div class="luxury-card">
-                <span style="color: var(--accent); font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase;">The Ceremony</span>
-                <h3 style="margin: 15px 0;">Muhurtham</h3>
-                <p>13th May, 2026 | 05:00 AM</p>
-                <p><strong>Hampi Functional Hall</strong><br>Tirumala, Andhra Pradesh</p>
-            </div>
-            <div class="luxury-card" style="border-left: 1px solid #eee;">
-                <span style="color: var(--accent); font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase;">The Celebration</span>
-                <h3 style="margin: 15px 0;">Reception</h3>
-                <p>21st May, 2026 | 07:00 PM</p>
-                <p><strong>Hotel Daspalla</strong><br>Visakhapatnam, Andhra Pradesh</p>
-            </div>
+        <div class="luxury-card">
+            <span style="color: var(--accent); font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 600;">The Ceremony</span>
+            <h3 style="font-family: 'Cormorant Garamond'; font-size: 1.8rem; margin: 10px 0;">Muhurtham</h3>
+            <p style="font-size: 0.9rem;">13th May, 2026 | 05:00 AM</p>
+            <p style="font-size: 0.85rem; opacity: 0.7;">Hampi Functional Hall, Tirumala</p>
         </div>
 
-        <div class="hint-section">
-            <h2>10 Years in the Making</h2>
-            <p style="margin-bottom: 30px; opacity: 0.9; max-width: 600px; margin-inline: auto;">From engineering classmates to long-distance survivors. Our journey has been a decade of love and growth.</p>
-            <button class="btn-outline" style="border-color: white; color: white;" onclick="showSheet('story')">Read Full Story</button>
-        </div>
-
-        <div style="text-align: center; padding: 80px 20px;">
-            <h2 style="font-family: 'Cormorant Garamond'; font-size: 2.5rem; margin-bottom: 20px;">Coming from afar?</h2>
-            <p style="margin-bottom: 30px; opacity: 0.7;">We've organized stays and travel guides for your convenience.</p>
-            <button class="btn-outline" onclick="showSheet('travel')">View Travel Info</button>
+        <div class="luxury-card">
+            <span style="color: var(--accent); font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 600;">The Celebration</span>
+            <h3 style="font-family: 'Cormorant Garamond'; font-size: 1.8rem; margin: 10px 0;">Reception</h3>
+            <p style="font-size: 0.9rem;">21st May, 2026 | 07:00 PM Onwards</p>
+            <p style="font-size: 0.85rem; opacity: 0.7;">Hotel Daspalla, Visakhapatnam</p>
         </div>
     </div>
 
-    <!-- OUR STORY PAGE -->
+    <!-- STORY PAGE -->
     <div id="story" class="page-sheet">
-        <div class="container">
-            <h2 style="font-family: 'Pinyon Script', cursive; font-size: 5rem; text-align: center; color: var(--accent);">Our Journey</h2>
-            <div class="timeline">
-                <div class="time-item left">
-                    <h4 style="color: var(--accent); letter-spacing: 2px;">2016</h4>
-                    <h3 style="font-family: 'Cormorant Garamond'; font-size: 2rem;">The First Meeting</h3>
-                    <p>Our paths crossed at Gayatri Vidya Parishad College of Engineering. What started as being classmates turned into a lifelong friendship.</p>
-                </div>
-                <div class="time-item right">
-                    <h4 style="color: var(--accent); letter-spacing: 2px;">2023 — 2026</h4>
-                    <h3 style="font-family: 'Cormorant Garamond'; font-size: 2rem;">Distance & Dedication</h3>
-                    <p>Three years of long distance across different cities tested us, but only made our bond stronger and our resolve firmer.</p>
-                </div>
-                <div class="time-item left">
-                    <h4 style="color: var(--accent); letter-spacing: 2px;">2026</h4>
-                    <h3 style="font-family: 'Cormorant Garamond'; font-size: 2rem;">The Forever Promise</h3>
-                    <p>After a decade of shared dreams, we are finally stepping into our new life together.</p>
-                </div>
+        <div class="timeline-container">
+            <h2 style="font-family: 'Pinyon Script', cursive; font-size: 3.5rem; color: var(--accent); text-align: center; margin-bottom: 40px;">Our Journey</h2>
+            <div class="v-line"></div>
+
+            <div class="story-node">
+                <span style="font-weight: 600; color: var(--accent); font-size: 0.7rem; letter-spacing: 2px;">2016</span>
+                <h3 style="font-family: 'Cormorant Garamond'; font-size: 1.6rem; margin-bottom: 8px;">The Spark</h3>
+                <p style="font-size: 0.9rem; opacity: 0.8;">Met at Gayatri Vidya Parishad College. Same branch, same section, instant connection.</p>
             </div>
-            <div style="text-align: center; margin-bottom: 60px;"><button class="btn-outline" onclick="showSheet('home')">Back to Home</button></div>
+
+            <div class="story-node">
+                <span style="font-weight: 600; color: var(--accent); font-size: 0.7rem; letter-spacing: 2px;">2018</span>
+                <h3 style="font-family: 'Cormorant Garamond'; font-size: 1.6rem; margin-bottom: 8px;">Becoming Real</h3>
+                <p style="font-size: 0.9rem; opacity: 0.8;">Canteen memories and internal exams—we decided to walk life hand-in-hand.</p>
+            </div>
+
+            <div class="story-node">
+                <span style="font-weight: 600; color: var(--accent); font-size: 0.7rem; letter-spacing: 2px;">2023 — 2026</span>
+                <h3 style="font-family: 'Cormorant Garamond'; font-size: 1.6rem; margin-bottom: 8px;">The Distance</h3>
+                <p style="font-size: 0.9rem; opacity: 0.8;">3 years of long-distance. Miles apart but never disconnected. Unbreakable bond.</p>
+            </div>
+
+            <div class="story-node" style="margin-bottom: 0;">
+                <span style="font-weight: 600; color: var(--accent); font-size: 0.7rem; letter-spacing: 2px;">MAY 2026</span>
+                <h3 style="font-family: 'Cormorant Garamond'; font-size: 1.6rem; margin-bottom: 8px;">The Promise</h3>
+                <p style="font-size: 0.9rem; opacity: 0.8;">10 years later, we are finally closing the gap to start our life together.</p>
+            </div>
         </div>
     </div>
 
     <!-- TRAVEL PAGE -->
     <div id="travel" class="page-sheet">
-        <div class="container">
-            <h2 style="font-family: 'Cormorant Garamond'; font-size: 4rem; text-align: center; color: var(--accent); margin-bottom: 40px;">Travel Guide</h2>
-            <div class="grid" style="background: transparent;">
-                <div class="luxury-card" style="text-align: left; background: white; margin: 10px; border-radius: 8px;">
-                    <h3 style="color: var(--accent);">The Muhurtham</h3>
-                    <p><strong>Tirumala</strong></p>
-                    <p style="font-size: 0.9rem; margin: 15px 0;">Rooms are provided at the Hampi Functional Hall for guests attending the morning ceremony.</p>
-                    <iframe style="width: 100%; height: 250px; border:0;" src="https://www.google.com/maps?q=Rayala Hampi Functional Hall Tirumala&output=embed" allowfullscreen="" loading="lazy"></iframe>
-                </div>
-                <div class="luxury-card" style="text-align: left; background: white; margin: 10px; border-radius: 8px;">
-                    <h3 style="color: var(--accent);">The Reception</h3>
-                    <p><strong>Visakhapatnam</strong></p>
-                    <p style="font-size: 0.9rem; margin: 15px 0;">For the grand celebration in Vizag, luxury stays are arranged at Hotel Daspalla.</p>
-                    <iframe style="width: 100%; height: 250px; border:0;" src="https://www.google.com/maps?q=Hotel Daspalla Visakhapatnam&output=embed" allowfullscreen="" loading="lazy"></iframe>
-                </div>
-            </div>
+        <div style="text-align: center; padding: 20px;">
+            <h2 style="font-family: 'Cormorant Garamond'; font-size: 2.5rem;">Location Details</h2>
+            <p style="letter-spacing: 1px; font-size: 0.7rem; opacity: 0.5;">STAY & DIRECTIONS</p>
+        </div>
+
+        <div class="luxury-card" style="text-align: left;">
+            <h4 style="color: var(--accent); font-size: 0.7rem; letter-spacing: 1px; margin-bottom: 5px;">WEDDING VENUE</h4>
+            <p><strong>Hampi Functional Hall, Tirumala</strong></p>
+            <p style="font-size: 0.8rem; margin: 10px 0; opacity: 0.7;">Accommodation provided at the venue for early morning guests.</p>
+            <iframe class="map-frame" src="https://www.google.com/maps?q=Rayala Hampi Functional Hall Tirumala&output=embed"></iframe>
+        </div>
+
+        <div class="luxury-card" style="text-align: left; margin-bottom: 40px;">
+            <h4 style="color: var(--accent); font-size: 0.7rem; letter-spacing: 1px; margin-bottom: 5px;">RECEPTION VENUE</h4>
+            <p><strong>Hotel Daspalla, Vizag</strong></p>
+            <p style="font-size: 0.8rem; margin: 10px 0; opacity: 0.7;">Stay arranged for outstation guests at the hotel.</p>
+            <iframe class="map-frame" src="https://www.google.com/maps?q=Hotel Daspalla Visakhapatnam&output=embed"></iframe>
         </div>
     </div>
 
     <!-- RSVP PAGE -->
     <div id="rsvp" class="page-sheet">
-        <div class="container" style="text-align: center;">
-            <div class="luxury-card" style="max-width: 600px; margin: 0 auto; padding: 60px; border-radius: 8px;">
-                <h2 style="font-family: 'Cormorant Garamond'; font-size: 3rem; margin-bottom: 20px;">RSVP</h2>
-                <p style="margin-bottom: 40px; opacity: 0.8;">Kindly let us know if you can make it. We would love to have you with us!</p>
-                <a href="https://wa.me/919618760508" style="text-decoration: none;">
-                    <button class="btn-rsvp" style="width: 100%; padding: 20px; font-size: 1rem;">Confirm via WhatsApp</button>
-                </a>
-            </div>
+        <div style="text-align: center; padding: 60px 25px;">
+            <h2 style="font-family: 'Cormorant Garamond'; font-size: 2.5rem;">Will You Join Us?</h2>
+            <p style="margin: 20px 0 30px; opacity: 0.7; font-size: 0.9rem;">It would mean the world to have you there as we start our new chapter.</p>
+            <a href="https://wa.me/919618760508" class="btn-wa">RSVP VIA WHATSAPP</a>
         </div>
     </div>
 
     <footer>
-        <div style="font-family: 'Pinyon Script'; font-size: 4rem; color: var(--accent); margin-bottom: 10px;">See you there!</div>
-        <p style="letter-spacing: 5px; font-size: 0.8rem; margin-bottom: 10px;">13 . 05 . 2026</p>
-        <p style="opacity: 0.4; font-size: 0.6rem;">© 2026 AKHIL & GAAYATHRI</p>
+        <div style="font-family: 'Pinyon Script'; font-size: 3rem; color: var(--accent); margin-bottom: 10px;">See you there!</div>
+        <p style="letter-spacing: 3px; font-size: 0.7rem; opacity: 0.5;">AKHIL & GAAYATHRI • 2026</p>
     </footer>
 
     <script>
+        // UI Logic
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+
+        function closeMenu(id) {
+            document.getElementById('navLinks').classList.remove('active');
+            showSheet(id);
+        }
+
         function showSheet(id) {
             document.querySelectorAll('.page-sheet').forEach(s => s.style.display = 'none');
             document.getElementById(id).style.display = 'block';
-            
-            document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
-            const activeLink = document.getElementById('nav-' + id);
-            if(activeLink) activeLink.classList.add('active');
-
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+        // Countdown Logic
         const weddingDate = new Date("May 13, 2026 05:00:00").getTime();
         setInterval(() => {
             const now = new Date().getTime();
             const diff = weddingDate - now;
-
-            if (diff < 0) {
-                document.querySelector('.countdown-container').innerHTML = "The Adventure Begins!";
-                return;
-            }
-
             document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
             document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
             document.getElementById('mins').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
