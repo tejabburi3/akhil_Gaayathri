@@ -63,7 +63,7 @@
             transition: var(--transition);
         }
         .nav-links.active { right: 0; }
-        .nav-links a { text-decoration: none; color: var(--navy); font-size: 1rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
+        .nav-links a { text-decoration: none; color: var(--navy); font-size: 1rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; cursor: pointer; }
 
         /* --- PAGES --- */
         .page-sheet { display: none; padding-top: 80px; min-height: 100vh; animation: fadeIn 0.8s ease; }
@@ -97,11 +97,11 @@
         .count-num { font-size: 1.8rem; font-family: 'Cormorant Garamond'; color: var(--accent); display: block; font-weight: 600; }
         .count-lab { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.5; }
 
-        /* --- ENHANCED STORY TIMELINE --- */
+        /* --- UPDATED STORY SIDE-BY-SIDE --- */
         .timeline { 
             position: relative; 
             padding: 40px 20px; 
-            max-width: 600px; 
+            max-width: 900px; /* Increased width for side-by-side */
             margin: 0 auto; 
         }
 
@@ -118,7 +118,10 @@
         .story-item { 
             position: relative; 
             padding-left: 60px; 
-            margin-bottom: 60px; 
+            margin-bottom: 80px; 
+            display: flex; 
+            align-items: center;
+            gap: 40px;
             text-align: left;
         }
 
@@ -126,7 +129,7 @@
             content: ''; 
             position: absolute; 
             left: 26px; 
-            top: 8px; 
+            top: 15px; 
             width: 9px; 
             height: 9px; 
             background: var(--accent); 
@@ -134,28 +137,35 @@
             z-index: 2;
         }
 
+        .story-content {
+            flex: 1.2;
+        }
+
+        .story-image-container {
+            flex: 1;
+        }
+
         .story-image {
             width: 100%;
-            height: 200px;
+            height: 280px;
             object-fit: cover;
             border-radius: 15px;
-            margin: 15px 0;
             box-shadow: 0 10px 20px rgba(0,0,0,0.08);
             display: block;
         }
 
         .story-item h4 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.4rem;
+            font-size: 1.6rem;
             color: var(--navy);
             font-weight: 600;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
         }
 
         .story-item p {
-            font-size: 0.9rem;
-            line-height: 1.5;
-            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #555;
         }
 
         /* --- TRAVEL GRID STYLES --- */
@@ -218,6 +228,20 @@
             .travel-grid-container { grid-template-columns: 1fr; }
             .google-map-iframe { height: 350px; }
         }
+
+        @media (max-width: 768px) {
+            .story-item { 
+                flex-direction: column; 
+                align-items: flex-start;
+                gap: 20px;
+            }
+            .story-image-container {
+                width: 100%;
+            }
+            .story-image {
+                height: 220px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -243,6 +267,7 @@
         </ul>
     </nav>
 
+    <!-- HOME SECTION -->
     <div id="home" class="page-sheet">
         <section class="hero">
             <h1 style="font-family: 'Cormorant Garamond'; font-size: 2.8rem; font-weight: 300;">Akhil <i>&</i> Gaayathri</h1>
@@ -275,41 +300,58 @@
         </div>
     </div>
 
-    <!-- UPDATED STORY SECTION -->
+    <!-- UPDATED STORY SECTION WITH SIDE-BY-SIDE LAYOUT -->
     <div id="story" class="page-sheet">
         <div class="timeline">
             <h2 style="font-family: 'Pinyon Script', cursive; font-size: 3.5rem; color: var(--accent); text-align: center; margin-bottom: 50px;">Our Journey</h2>
             
             <!-- 2016 -->
             <div class="story-item">
-                <h4>2016 — The Spark</h4>
-                <p>Meeting at Gayatri Vidya Parishad College. A connection that was instant between lectures and labs.</p>
-                <img src="4.jpeg" alt="2016 Memory" class="story-image">
+                <div class="story-content">
+                    <h4>2016 — The Spark</h4>
+                    <p>Meeting at Gayatri Vidya Parishad College. A connection that was instant between lectures and labs.</p>
+                </div>
+                <div class="story-image-container">
+                    <img src="4.jpeg" alt="2016 Memory" class="story-image">
+                </div>
             </div>
 
             <!-- 2018 -->
             <div class="story-item">
-                <h4>2018 — The Decision</h4>
-                <p>The year we realized friendship wasn't enough. We chose forever.</p>
-                <img src="3.jpeg" alt="2018 Memory" class="story-image">
+                <div class="story-content">
+                    <h4>2018 — The Decision</h4>
+                    <p>The year we realized friendship wasn't enough. We chose forever.</p>
+                </div>
+                <div class="story-image-container">
+                    <img src="3.jpeg" alt="2018 Memory" class="story-image">
+                </div>
             </div>
 
             <!-- 2023 -->
             <div class="story-item">
-                <h4>2023-2026 — Distance</h4>
-                <p>3 years of long distance. Miles apart, but always connected through every high and low.</p>
-                <img src="1.jpeg" alt="Long Distance Memory" class="story-image">
+                <div class="story-content">
+                    <h4>2023-2026 — Distance</h4>
+                    <p>3 years of long distance. Miles apart, but always connected through every high and low.</p>
+                </div>
+                <div class="story-image-container">
+                    <img src="1.jpeg" alt="Long Distance Memory" class="story-image">
+                </div>
             </div>
 
             <!-- 2026 -->
             <div class="story-item">
-                <h4>2026 — The Promise</h4>
-                <p>10 years later, we are finally coming home to each other.</p>
-                <img src="2.jpeg" alt="The Promise" class="story-image">
+                <div class="story-content">
+                    <h4>2026 — The Promise</h4>
+                    <p>10 years later, we are finally coming home to each other.</p>
+                </div>
+                <div class="story-image-container">
+                    <img src="2.jpeg" alt="The Promise" class="story-image">
+                </div>
             </div>
         </div>
     </div>
 
+    <!-- TRAVEL SECTION -->
     <div id="travel" class="page-sheet">
         <div class="location-header">
             <h2>Location Details</h2>
@@ -317,7 +359,6 @@
         </div>
 
         <div class="travel-grid-container">
-            
             <div class="travel-card">
                 <h3>1. THE WEDDING (TIRUMALA)</h3>
                 <p class="venue-title">Hampi Functional Hall</p>
@@ -345,10 +386,10 @@
                     loading="lazy">
                 </iframe>
             </div>
-
         </div>
     </div>
 
+    <!-- RSVP SECTION -->
     <div id="rsvp" class="page-sheet">
         <div style="text-align: center; padding: 80px 25px;">
             <h2 style="font-family: 'Cormorant Garamond'; font-size: 2.8rem;">Will You Join Us?</h2>
@@ -367,7 +408,7 @@
         const music = document.getElementById('bgMusic');
 
         function startExperience() {
-            music.play();
+            music.play().catch(e => console.log("Audio play blocked until interaction."));
             document.getElementById('intro').style.opacity = '0';
             setTimeout(() => { document.getElementById('intro').style.display = 'none'; }, 1000);
         }
@@ -381,7 +422,8 @@
 
         function showSheet(id) {
             document.querySelectorAll('.page-sheet').forEach(s => s.style.display = 'none');
-            document.getElementById(id).style.display = 'block';
+            const sheet = document.getElementById(id);
+            if(sheet) sheet.style.display = 'block';
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -390,9 +432,11 @@
         setInterval(() => {
             const now = new Date().getTime();
             const diff = weddingDate - now;
-            document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
-            document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
-            document.getElementById('mins').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+            if(diff > 0) {
+                document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+                document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+                document.getElementById('mins').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+            }
         }, 1000);
 
         window.onload = () => showSheet('home');
