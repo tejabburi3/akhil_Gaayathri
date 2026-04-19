@@ -28,50 +28,48 @@
             line-height: 1.6;
         }
 
-        /* --- CLICK HEART ANIMATION --- */
+        /* --- CONTINUOUS FLOATING HEARTS (BACKGROUND) --- */
+        .floating-heart {
+            position: fixed;
+            color: rgba(195, 65, 33, 0.3);
+            pointer-events: none;
+            z-index: 1;
+            user-select: none;
+            animation: floatAnimation linear infinite;
+        }
+
+        @keyframes floatAnimation {
+            0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.5; }
+            80% { opacity: 0.5; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* --- CLICK HEART ANIMATION (BURST) --- */
         .heart-fly {
             position: fixed;
             color: var(--accent);
             pointer-events: none;
             z-index: 10000;
             user-select: none;
-            animation: flyUp 4s ease-out forwards;
+            animation: flyUp 3s ease-out forwards;
             opacity: 0;
         }
 
         @keyframes flyUp {
-            0% {
-                transform: translateY(0) scale(0.5) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100vh) scale(1.5) rotate(45deg);
-                opacity: 0;
-            }
+            0% { transform: translateY(0) scale(0.5) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-100vh) scale(1.5) rotate(45deg); opacity: 0; }
         }
 
-        /* --- DOORS & WAX SEAL INTRO --- */
+        /* --- INTRO & DOORS --- */
         #intro {
-            position: fixed;
-            width: 100%;
-            height: 100vh;
-            z-index: 9999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            perspective: 1000px;
+            position: fixed; width: 100%; height: 100vh; z-index: 9999;
+            display: flex; justify-content: center; align-items: center; perspective: 1000px;
         }
-
         .door {
-            position: absolute;
-            top: 0;
-            width: 50%;
-            height: 100%;
-            background: var(--accent);
-            transition: transform 1.5s cubic-bezier(0.7, 0, 0.3, 1);
-            z-index: 1;
+            position: absolute; top: 0; width: 50%; height: 100%;
+            background: var(--accent); transition: transform 1.5s cubic-bezier(0.7, 0, 0.3, 1); z-index: 1;
         }
-
         .door-left { left: 0; border-right: 1px solid rgba(255,255,255,0.1); }
         .door-right { right: 0; border-left: 1px solid rgba(255,255,255,0.1); }
 
@@ -81,132 +79,22 @@
         #intro.opened { pointer-events: none; visibility: hidden; transition: visibility 0s 1.5s; }
 
         .seal-wrapper {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 10;
-            text-align: center;
-            cursor: pointer;
-            transition: var(--transition);
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            z-index: 10; text-align: center; cursor: pointer; transition: var(--transition);
         }
-
         .wax-seal {
-            width: 110px;
-            height: 110px;
-            background: var(--wax);
+            width: 110px; height: 110px; background: var(--wax);
             border-radius: 54% 46% 52% 48% / 47% 53% 47% 53%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             box-shadow: inset 0 0 20px rgba(0,0,0,0.4), 5px 10px 20px rgba(0,0,0,0.5);
             animation: pulse 2.5s infinite ease-in-out;
         }
-
         .seal-initials { font-family: 'Pinyon Script', cursive; color: white; font-size: 2.2rem; }
-        
-        .seal-wrapper p {
-            color: white;
-            font-family: 'Cormorant Garamond';
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            font-size: 0.7rem;
-            margin-top: 20px;
-        }
+        .seal-wrapper p { color: white; font-family: 'Cormorant Garamond'; text-transform: uppercase; letter-spacing: 4px; font-size: 0.7rem; margin-top: 20px; }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.08); }
-        }
-        <style>
-    /* --- CONTINUOUS FLOATING HEARTS --- */
-    .floating-heart {
-        position: fixed;
-        color: rgba(195, 65, 33, 0.4); /* Subtle accent color with transparency */
-        pointer-events: none;
-        z-index: 1; /* Sits behind text but above background */
-        user-select: none;
-        animation: floatAnimation linear infinite;
-    }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
 
-    /* Animation for Bottom to Top */
-    @keyframes floatAnimation {
-        0% {
-            transform: translateY(100vh) rotate(0deg);
-            opacity: 0;
-        }
-        20% { opacity: 0.6; }
-        80% { opacity: 0.6; }
-        100% {
-            transform: translateY(-10vh) rotate(360deg);
-            opacity: 0;
-        }
-    }
-
-    /* Click Effect Styles (Burst) */
-    .heart-burst {
-        position: fixed;
-        color: var(--accent);
-        pointer-events: none;
-        z-index: 10000;
-        animation: burstUp 2.5s ease-out forwards;
-    }
-
-    @keyframes burstUp {
-        0% { transform: scale(0.5); opacity: 1; }
-        100% { transform: translateY(-50vh) scale(1.5); opacity: 0; }
-    }
-</style>
-
-<script>
-    // 1. Function for Continuous Background Rain (Bottom to Top)
-    function createBackgroundHeart() {
-        const heart = document.createElement('div');
-        heart.classList.add('floating-heart');
-        heart.innerHTML = '❤️';
-        
-        // Randomize horizontal position
-        heart.style.left = Math.random() * 100 + 'vw';
-        
-        // Randomize size between 10px and 25px
-        const size = Math.random() * 15 + 10;
-        heart.style.fontSize = size + 'px';
-        
-        // Randomize duration (slow drift)
-        heart.style.animationDuration = (Math.random() * 10 + 10) + 's';
-        
-        document.body.appendChild(heart);
-
-        // Remove heart after animation to keep the page light
-        setTimeout(() => { heart.remove(); }, 20000);
-    }
-
-    // Start the continuous rain every 800ms
-    setInterval(createBackgroundHeart, 800);
-
-    // 2. Click Interaction (The Burst you requested)
-    function spawnHearts(e) {
-        for(let i=0; i<6; i++) {
-            setTimeout(() => {
-                const heart = document.createElement('div');
-                heart.classList.add('heart-burst');
-                heart.innerHTML = '❤️';
-                
-                // Position at click coordinates
-                heart.style.left = (e.clientX + (Math.random() - 0.5) * 40) + 'px';
-                heart.style.top = e.clientY + 'px';
-                
-                document.body.appendChild(heart);
-                setTimeout(() => { heart.remove(); }, 2500);
-            }, i * 100);
-        }
-    }
-
-    // Add click listener to the whole body
-    document.body.addEventListener('click', spawnHearts);
-</script>
-
-        /* --- NAVIGATION --- */
+        /* --- UI COMPONENTS --- */
         nav {
             position: fixed; top: 0; width: 100%; padding: 15px 5%;
             display: flex; justify-content: space-between; align-items: center;
@@ -215,7 +103,6 @@
         }
         .logo { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; letter-spacing: 1px; font-weight: 600; cursor: pointer; }
         .logo span { font-family: 'Pinyon Script', cursive; color: var(--accent); font-size: 1.5rem; }
-
         .menu-btn div { height: 2px; background-color: var(--navy); margin: 5px 0; width: 25px; }
 
         .nav-links {
@@ -227,58 +114,30 @@
         .nav-links.active { right: 0; }
         .nav-links a { text-decoration: none; color: var(--navy); font-size: 1rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; cursor: pointer; }
 
-        /* --- PAGES --- */
-        .page-sheet { display: none; padding-top: 80px; min-height: 100vh; animation: fadeIn 0.8s ease; }
+        .page-sheet { display: none; padding-top: 80px; min-height: 100vh; animation: fadeIn 0.8s ease; position: relative; z-index: 2; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        .luxury-card { 
-            background: var(--white); padding: 30px 20px; text-align: center; 
-            margin: 20px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.03);
-        }
-        
-        .btn-text {
-            color: var(--gold); font-size: 0.7rem; letter-spacing: 2px;
-            text-transform: uppercase; font-weight: 600; text-decoration: none;
-            display: inline-block; margin-top: 15px; border-bottom: 1px solid var(--gold);
-            cursor: pointer;
-        }
+        .luxury-card { background: var(--white); padding: 30px 20px; text-align: center; margin: 20px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
+        .btn-text { color: var(--gold); font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; text-decoration: none; display: inline-block; margin-top: 15px; border-bottom: 1px solid var(--gold); cursor: pointer; }
 
         .hero { text-align: center; padding: 20px; }
-        .main-portrait {
-            width: 85%; max-width: 400px; height: 450px;
-            margin: 20px auto; object-fit: cover;
-            border-radius: 200px 200px 0 0;
-            border: 5px solid var(--white); box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-        }
+        .main-portrait { width: 85%; max-width: 400px; height: 450px; margin: 20px auto; object-fit: cover; border-radius: 200px 200px 0 0; border: 5px solid var(--white); box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
 
-        .countdown-container { 
-            display: flex; justify-content: center; gap: 15px; margin: 25px 20px;
-            background: var(--white); padding: 20px; border-radius: 8px;
-        }
+        .countdown-container { display: flex; justify-content: center; gap: 15px; margin: 25px 20px; background: var(--white); padding: 20px; border-radius: 8px; }
         .count-num { font-size: 1.8rem; font-family: 'Cormorant Garamond'; color: var(--accent); display: block; font-weight: 600; }
         .count-lab { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.5; }
 
-        /* --- STORY --- */
         .timeline { position: relative; padding: 40px 20px; max-width: 900px; margin: 0 auto; }
         .timeline::before { content: ''; position: absolute; left: 30px; top: 0; bottom: 0; width: 1px; background: rgba(195, 65, 33, 0.2); }
-        
-        .story-item { 
-            position: relative; padding-left: 60px; margin-bottom: 80px; 
-            display: flex; align-items: center; gap: 40px; text-align: left;
-        }
-        .story-item::before { 
-            content: '❤️'; position: absolute; left: 21px; top: 12px; 
-            font-size: 0.8rem; color: var(--accent); background: var(--cream); z-index: 2;
-        }
-
+        .story-item { position: relative; padding-left: 60px; margin-bottom: 80px; display: flex; align-items: center; gap: 40px; text-align: left; }
+        .story-item::before { content: '❤️'; position: absolute; left: 21px; top: 12px; font-size: 0.8rem; color: var(--accent); background: var(--cream); z-index: 2; }
         .story-image { width: 100%; height: 280px; object-fit: cover; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.08); }
 
-        /* --- TRAVEL --- */
         .travel-grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; padding: 20px; }
         .travel-card { background: var(--white); padding: 40px; border-radius: 8px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
         .google-map-iframe { width: 100%; height: 450px; border: 1px solid #eee; border-radius: 8px; }
 
-        footer { background: var(--navy); color: white; padding: 60px 20px; text-align: center; }
+        footer { background: var(--navy); color: white; padding: 60px 20px; text-align: center; position: relative; z-index: 2; }
 
         @media (max-width: 992px) { .travel-grid-container { grid-template-columns: 1fr; } }
         @media (max-width: 768px) { .story-item { flex-direction: column; align-items: flex-start; gap: 20px; } }
@@ -344,14 +203,14 @@
                 <div class="story-content"><h4>2016 — The Spark</h4><p>Meeting at GVP College. A connection that was instant.</p></div>
                 <div class="story-image-container"><img src="4.jpeg" class="story-image"></div>
             </div>
-            </div>
+        </div>
     </div>
 
     <div id="travel" class="page-sheet">
         <div class="travel-grid-container">
             <div class="travel-card">
                 <h3>WEDDING (TIRUMALA)</h3>
-                <iframe class="google-map-iframe" src="https://maps.google.com/maps?q=Hampi%20Functional%20Hall%20Tirumala&t=&z=13&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy"></iframe>
+                <iframe class="google-map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3877.3484042857095!2d79.34444!3d13.68265" allowfullscreen="" loading="lazy"></iframe>
             </div>
         </div>
     </div>
@@ -365,21 +224,34 @@
         const music = document.getElementById('bgMusic');
 
         function startExperience(e) {
-            e.stopPropagation(); // Prevents double hearts on initial click
+            e.stopPropagation();
             document.getElementById('intro').classList.add('opened');
-            music.play().catch(e => console.log("Audio blocked"));
+            music.play().catch(err => console.log("Audio blocked: ", err));
             setTimeout(() => { document.getElementById('intro').style.display = 'none'; }, 1500);
             
-            // Initial burst
+            // Initial Burst from center
             for(let i=0; i<10; i++) {
                 createHeart(window.innerWidth/2, window.innerHeight/2);
             }
         }
 
-        // --- NEW CLICK INTERACTION ---
+        // --- BACKGROUND CONTINUOUS RAIN ---
+        function createBackgroundHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('floating-heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            const size = Math.random() * 15 + 10;
+            heart.style.fontSize = size + 'px';
+            heart.style.animationDuration = (Math.random() * 8 + 7) + 's';
+            document.body.appendChild(heart);
+            setTimeout(() => { heart.remove(); }, 15000);
+        }
+        setInterval(createBackgroundHeart, 1000);
+
+        // --- INTERACTIVE CLICK BURST ---
         function spawnHearts(e) {
-            // Create a cluster of 5 hearts on every click
-            for(let i=0; i<5; i++) {
+            for(let i=0; i<6; i++) {
                 setTimeout(() => {
                     createHeart(e.clientX, e.clientY);
                 }, i * 100);
@@ -390,23 +262,17 @@
             const heart = document.createElement('div');
             heart.classList.add('heart-fly');
             heart.innerHTML = '❤️';
-            
-            // Randomize position slightly around the click point
-            const offsetX = (Math.random() - 0.5) * 100;
+            const offsetX = (Math.random() - 0.5) * 60;
             heart.style.left = (x + offsetX) + 'px';
             heart.style.top = y + 'px';
-            
-            // Randomize size and speed
             const size = Math.random() * 15 + 15;
             heart.style.fontSize = size + 'px';
-            heart.style.animationDuration = (Math.random() * 2 + 2) + 's';
-            
+            heart.style.animationDuration = (Math.random() * 2 + 1.5) + 's';
             document.body.appendChild(heart);
-            
-            // Clean up after animation ends
-            setTimeout(() => { heart.remove(); }, 4000);
+            setTimeout(() => { heart.remove(); }, 3000);
         }
 
+        // --- UI LOGIC ---
         function toggleMenu() { document.getElementById('navLinks').classList.toggle('active'); }
         function closeMenu(id) { document.getElementById('navLinks').classList.remove('active'); showSheet(id); }
 
