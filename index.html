@@ -28,23 +28,26 @@
             line-height: 1.6;
         }
 
-        /* --- HEART ANIMATIONS --- */
-        .heart-particle {
+        /* --- CLICK HEART ANIMATION --- */
+        .heart-fly {
             position: fixed;
             color: var(--accent);
-            font-size: 1.2rem;
             pointer-events: none;
-            z-index: 500;
+            z-index: 10000;
             user-select: none;
-            animation: floatHeart 6s linear forwards;
+            animation: flyUp 4s ease-out forwards;
             opacity: 0;
         }
 
-        @keyframes floatHeart {
-            0% { transform: translateY(100vh) scale(0); opacity: 0; }
-            20% { opacity: 0.6; }
-            80% { opacity: 0.6; }
-            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+        @keyframes flyUp {
+            0% {
+                transform: translateY(0) scale(0.5) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) scale(1.5) rotate(45deg);
+                opacity: 0;
+            }
         }
 
         /* --- DOORS & WAX SEAL INTRO --- */
@@ -144,7 +147,6 @@
         .luxury-card { 
             background: var(--white); padding: 30px 20px; text-align: center; 
             margin: 20px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.03);
-            position: relative;
         }
         
         .btn-text {
@@ -169,9 +171,7 @@
         .count-num { font-size: 1.8rem; font-family: 'Cormorant Garamond'; color: var(--accent); display: block; font-weight: 600; }
         .count-lab { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.5; }
 
-        .heart-divider { color: var(--accent); margin: 20px 0; font-size: 1.2rem; }
-
-        /* --- STORY SIDE-BY-SIDE --- */
+        /* --- STORY --- */
         .timeline { position: relative; padding: 40px 20px; max-width: 900px; margin: 0 auto; }
         .timeline::before { content: ''; position: absolute; left: 30px; top: 0; bottom: 0; width: 1px; background: rgba(195, 65, 33, 0.2); }
         
@@ -181,18 +181,14 @@
         }
         .story-item::before { 
             content: '❤️'; position: absolute; left: 21px; top: 12px; 
-            font-size: 0.8rem; z-index: 2; color: var(--accent); background: var(--cream);
+            font-size: 0.8rem; color: var(--accent); background: var(--cream); z-index: 2;
         }
 
-        .story-content { flex: 1.2; }
-        .story-image-container { flex: 1; }
         .story-image { width: 100%; height: 280px; object-fit: cover; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.08); }
 
-        /* --- TRAVEL GRID --- */
-        .travel-grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 1300px; margin: 0 auto; padding: 20px; }
+        /* --- TRAVEL --- */
+        .travel-grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; padding: 20px; }
         .travel-card { background: var(--white); padding: 40px; border-radius: 8px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
-        .venue-title { font-size: 1.1rem; color: var(--navy); margin-bottom: 12px; }
-        .stay-details { font-size: 0.95rem; color: #555; margin-bottom: 30px; }
         .google-map-iframe { width: 100%; height: 450px; border: 1px solid #eee; border-radius: 8px; }
 
         footer { background: var(--navy); color: white; padding: 60px 20px; text-align: center; }
@@ -201,16 +197,16 @@
         @media (max-width: 768px) { .story-item { flex-direction: column; align-items: flex-start; gap: 20px; } }
     </style>
 </head>
-<body>
+<body onclick="spawnHearts(event)">
 
     <div id="intro">
         <div class="door door-left"></div>
         <div class="door door-right"></div>
-        <div class="seal-wrapper" onclick="startExperience()">
+        <div class="seal-wrapper" onclick="startExperience(event)">
             <div class="wax-seal">
                 <span class="seal-initials">A&G</span>
             </div>
-            <p>❤️ Tap to Unveil ❤️</p>
+            <p>Tap to Unveil ❤️</p>
         </div>
     </div>
 
@@ -231,7 +227,7 @@
     <div id="home" class="page-sheet">
         <section class="hero">
             <h1 style="font-family: 'Cormorant Garamond'; font-size: 2.8rem; font-weight: 300;">Akhil <i>&</i> Gaayathri</h1>
-            <div class="heart-divider">❤️❤️❤️</div>
+            <p style="font-size: 0.7rem; letter-spacing: 5px; margin-bottom: 20px; opacity: 0.6;">TAP ANYWHERE FOR LOVE</p>
             <img src="WhatsApp Image 2026-04-03 at 00.46.33.jpeg" alt="Couple" class="main-portrait">
             
             <div class="countdown-container">
@@ -243,113 +239,85 @@
 
         <div class="luxury-card">
             <h4 style="font-family: 'Pinyon Script'; font-size: 2.5rem; color: var(--accent);">Our Roots</h4>
-            <p style="font-size: 0.9rem; margin-top: 10px;">It all began in 2016 at <b>GVP College</b>. From the same branch and section to a decade of memories, we've grown up together.</p>
+            <p style="font-size: 0.9rem; margin-top: 10px;">It all began in 2016 at <b>GVP College</b>. A decade of memories, and a lifetime more to go.</p>
             <a onclick="showSheet('story')" class="btn-text">Read the Full Story</a>
         </div>
 
         <div class="luxury-card">
-            <span style="color: var(--accent); font-size: 0.6rem; letter-spacing: 2px; font-weight: 600;">THE WEDDING ❤️</span>
-            <h3 style="font-family: 'Cormorant Garamond'; font-size: 1.8rem; margin: 10px 0;">13th May, 2026</h3>
+            <h3 style="font-family: 'Cormorant Garamond'; font-size: 1.8rem;">13th May, 2026</h3>
             <p style="font-size: 0.85rem; opacity: 0.8;">Hampi Functional Hall, Tirumala<br>Muhurtham: 09:00 AM</p>
             <a onclick="showSheet('travel')" class="btn-text">Stay & Map Details</a>
-        </div>
-
-        <div class="luxury-card">
-            <span style="color: var(--accent); font-size: 0.6rem; letter-spacing: 2px; font-weight: 600;">THE RECEPTION ❤️</span>
-            <h3 style="font-family: 'Cormorant Garamond'; font-size: 1.8rem; margin: 10px 0;">21st May, 2026</h3>
-            <p style="font-size: 0.85rem; opacity: 0.8;">Hotel Daspalla, Visakhapatnam<br>Starting 07:00 PM</p>
         </div>
     </div>
 
     <div id="story" class="page-sheet">
         <div class="timeline">
             <h2 style="font-family: 'Pinyon Script', cursive; font-size: 3.5rem; color: var(--accent); text-align: center; margin-bottom: 50px;">Our Journey</h2>
-            
             <div class="story-item">
-                <div class="story-content">
-                    <h4>2016 — The Spark</h4>
-                    <p>Meeting at Gayatri Vidya Parishad College. A connection that was instant between lectures and labs.</p>
-                </div>
+                <div class="story-content"><h4>2016 — The Spark</h4><p>Meeting at GVP College. A connection that was instant.</p></div>
                 <div class="story-image-container"><img src="4.jpeg" class="story-image"></div>
             </div>
-
-            <div class="story-item">
-                <div class="story-content">
-                    <h4>2018 — The Decision</h4>
-                    <p>The year we realized friendship wasn't enough. We chose forever.</p>
-                </div>
-                <div class="story-image-container"><img src="3.jpeg" class="story-image"></div>
             </div>
-
-            <div class="story-item">
-                <div class="story-content">
-                    <h4>2023-2026 — Distance</h4>
-                    <p>3 years of long distance. Miles apart, but always connected through every high and low.</p>
-                </div>
-                <div class="story-image-container"><img src="1.jpeg" class="story-image"></div>
-            </div>
-
-            <div class="story-item">
-                <div class="story-content">
-                    <h4>2026 — The Promise</h4>
-                    <p>10 years later, we are finally coming home to each other.</p>
-                </div>
-                <div class="story-image-container"><img src="2.jpeg" class="story-image"></div>
-            </div>
-        </div>
     </div>
 
     <div id="travel" class="page-sheet">
         <div class="travel-grid-container">
             <div class="travel-card">
-                <h3>1. THE WEDDING (TIRUMALA)</h3>
-                <p class="venue-title">Hampi Functional Hall</p>
-                <p class="stay-details"><strong>Stay:</strong> Accommodations provided at the venue for early morning Muhurtham (5 AM - 9 AM).</p>
+                <h3>WEDDING (TIRUMALA)</h3>
                 <iframe class="google-map-iframe" src="https://maps.google.com/maps?q=Hampi%20Functional%20Hall%20Tirumala&t=&z=13&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy"></iframe>
-            </div>
-
-            <div class="travel-card">
-                <h3>2. THE RECEPTION (VIZAG)</h3>
-                <p class="venue-title">Hotel Daspalla</p>
-                <p class="stay-details"><strong>Stay:</strong> Luxury stay arranged at Hotel Daspalla for guests from 7 PM onwards on May 21st.</p>
-                <iframe class="google-map-iframe" src="https://maps.google.com/maps?q=Hotel%20Daspalla%20Visakhapatnam&t=&z=13&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy"></iframe>
             </div>
         </div>
     </div>
 
     <footer>
         <div style="font-family: 'Pinyon Script'; font-size: 3rem; color: var(--accent); margin-bottom: 10px;">See you there! ❤️</div>
-        <p style="letter-spacing: 3px; font-size: 0.8rem; opacity: 0.8; margin-bottom: 5px;">Contact: +91 70932 45918</p>
         <p style="letter-spacing: 3px; font-size: 0.7rem; opacity: 0.5;">AKHIL ❤️ GAAYATHRI 👩‍❤️‍👨 2026</p>
     </footer>
 
     <script>
         const music = document.getElementById('bgMusic');
 
-        function startExperience() {
+        function startExperience(e) {
+            e.stopPropagation(); // Prevents double hearts on initial click
             document.getElementById('intro').classList.add('opened');
-            music.play().catch(e => console.log("Audio play blocked."));
-            setTimeout(() => { 
-                document.getElementById('intro').style.display = 'none';
-                startHeartRain();
-            }, 1500);
+            music.play().catch(e => console.log("Audio blocked"));
+            setTimeout(() => { document.getElementById('intro').style.display = 'none'; }, 1500);
+            
+            // Initial burst
+            for(let i=0; i<10; i++) {
+                createHeart(window.innerWidth/2, window.innerHeight/2);
+            }
         }
 
-        // Heart Animation Logic
-        function createHeart() {
+        // --- NEW CLICK INTERACTION ---
+        function spawnHearts(e) {
+            // Create a cluster of 5 hearts on every click
+            for(let i=0; i<5; i++) {
+                setTimeout(() => {
+                    createHeart(e.clientX, e.clientY);
+                }, i * 100);
+            }
+        }
+
+        function createHeart(x, y) {
             const heart = document.createElement('div');
-            heart.classList.add('heart-particle');
+            heart.classList.add('heart-fly');
             heart.innerHTML = '❤️';
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
-            heart.style.fontSize = (Math.random() * 10 + 15) + 'px';
+            
+            // Randomize position slightly around the click point
+            const offsetX = (Math.random() - 0.5) * 100;
+            heart.style.left = (x + offsetX) + 'px';
+            heart.style.top = y + 'px';
+            
+            // Randomize size and speed
+            const size = Math.random() * 15 + 15;
+            heart.style.fontSize = size + 'px';
+            heart.style.animationDuration = (Math.random() * 2 + 2) + 's';
+            
             document.body.appendChild(heart);
             
-            setTimeout(() => { heart.remove(); }, 6000);
-        }
-
-        function startHeartRain() {
-            setInterval(createHeart, 800);
+            // Clean up after animation ends
+            setTimeout(() => { heart.remove(); }, 4000);
         }
 
         function toggleMenu() { document.getElementById('navLinks').classList.toggle('active'); }
