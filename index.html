@@ -29,20 +29,30 @@
         }
 
         /* --- CONTINUOUS FLOATING HEARTS (BACKGROUND) --- */
-        .floating-heart {
+        .bg-heart-container {
             position: fixed;
-            color: rgba(195, 65, 33, 0.3);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             pointer-events: none;
-            z-index: 1;
-            user-select: none;
-            animation: floatAnimation linear infinite;
+            z-index: 1; /* Sits behind text and images */
+            overflow: hidden;
         }
 
-        @keyframes floatAnimation {
-            0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
-            20% { opacity: 0.5; }
-            80% { opacity: 0.5; }
-            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        .drifting-heart {
+            position: absolute;
+            bottom: -50px;
+            color: rgba(195, 65, 33, 0.2); /* Subtle transparency */
+            user-select: none;
+            animation: driftUp linear forwards;
+        }
+
+        @keyframes driftUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.4; }
+            90% { opacity: 0.4; }
+            100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
         }
 
         /* --- CLICK HEART ANIMATION (BURST) --- */
@@ -103,6 +113,7 @@
         }
         .logo { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; letter-spacing: 1px; font-weight: 600; cursor: pointer; }
         .logo span { font-family: 'Pinyon Script', cursive; color: var(--accent); font-size: 1.5rem; }
+        .menu-btn { cursor: pointer; }
         .menu-btn div { height: 2px; background-color: var(--navy); margin: 5px 0; width: 25px; }
 
         .nav-links {
@@ -144,6 +155,8 @@
     </style>
 </head>
 <body onclick="spawnHearts(event)">
+
+    <div class="bg-heart-container" id="bgHearts"></div>
 
     <div id="intro">
         <div class="door door-left"></div>
@@ -210,7 +223,7 @@
         <div class="travel-grid-container">
             <div class="travel-card">
                 <h3>WEDDING (TIRUMALA)</h3>
-                <iframe class="google-map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3877.3484042857095!2d79.34444!3d13.68265" allowfullscreen="" loading="lazy"></iframe>
+                <iframe class="google-map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3826.6853245648!2d80.648!3d16.506!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTbCsDMwJzIxLjYiTiA4MMKwMzgnNTIuOCJF!5e0!3m2!1sen!2sin!4v1620000000000" allowfullscreen="" loading="lazy"></iframe>
             </div>
         </div>
     </div>
@@ -222,6 +235,7 @@
 
     <script>
         const music = document.getElementById('bgMusic');
+        const bgContainer = document.getElementById('bgHearts');
 
         function startExperience(e) {
             e.stopPropagation();
@@ -236,18 +250,26 @@
         }
 
         // --- BACKGROUND CONTINUOUS RAIN ---
-        function createBackgroundHeart() {
+        function spawnBackgroundHeart() {
             const heart = document.createElement('div');
-            heart.classList.add('floating-heart');
+            heart.className = 'drifting-heart';
             heart.innerHTML = '❤️';
+            
+            // Randomize position across entire width
             heart.style.left = Math.random() * 100 + 'vw';
+            
+            // Randomize size and speed
             const size = Math.random() * 15 + 10;
             heart.style.fontSize = size + 'px';
-            heart.style.animationDuration = (Math.random() * 8 + 7) + 's';
-            document.body.appendChild(heart);
-            setTimeout(() => { heart.remove(); }, 15000);
+            const duration = Math.random() * 5 + 10; 
+            heart.style.animationDuration = duration + 's';
+            
+            bgContainer.appendChild(heart);
+
+            // Cleanup
+            setTimeout(() => { heart.remove(); }, duration * 1000);
         }
-        setInterval(createBackgroundHeart, 1000);
+        setInterval(spawnBackgroundHeart, 1000);
 
         // --- INTERACTIVE CLICK BURST ---
         function spawnHearts(e) {
