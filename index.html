@@ -28,6 +28,25 @@
             line-height: 1.6;
         }
 
+        /* --- HEART ANIMATIONS --- */
+        .heart-particle {
+            position: fixed;
+            color: var(--accent);
+            font-size: 1.2rem;
+            pointer-events: none;
+            z-index: 500;
+            user-select: none;
+            animation: floatHeart 6s linear forwards;
+            opacity: 0;
+        }
+
+        @keyframes floatHeart {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            20% { opacity: 0.6; }
+            80% { opacity: 0.6; }
+            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+        }
+
         /* --- DOORS & WAX SEAL INTRO --- */
         #intro {
             position: fixed;
@@ -125,6 +144,7 @@
         .luxury-card { 
             background: var(--white); padding: 30px 20px; text-align: center; 
             margin: 20px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            position: relative;
         }
         
         .btn-text {
@@ -149,6 +169,8 @@
         .count-num { font-size: 1.8rem; font-family: 'Cormorant Garamond'; color: var(--accent); display: block; font-weight: 600; }
         .count-lab { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.5; }
 
+        .heart-divider { color: var(--accent); margin: 20px 0; font-size: 1.2rem; }
+
         /* --- STORY SIDE-BY-SIDE --- */
         .timeline { position: relative; padding: 40px 20px; max-width: 900px; margin: 0 auto; }
         .timeline::before { content: ''; position: absolute; left: 30px; top: 0; bottom: 0; width: 1px; background: rgba(195, 65, 33, 0.2); }
@@ -158,8 +180,8 @@
             display: flex; align-items: center; gap: 40px; text-align: left;
         }
         .story-item::before { 
-            content: ''; position: absolute; left: 26px; top: 15px; 
-            width: 9px; height: 9px; background: var(--accent); border-radius: 50%; z-index: 2;
+            content: '❤️'; position: absolute; left: 21px; top: 12px; 
+            font-size: 0.8rem; z-index: 2; color: var(--accent); background: var(--cream);
         }
 
         .story-content { flex: 1.2; }
@@ -188,7 +210,7 @@
             <div class="wax-seal">
                 <span class="seal-initials">A&G</span>
             </div>
-            <p>Tap to Unveil</p>
+            <p>❤️ Tap to Unveil ❤️</p>
         </div>
     </div>
 
@@ -209,6 +231,7 @@
     <div id="home" class="page-sheet">
         <section class="hero">
             <h1 style="font-family: 'Cormorant Garamond'; font-size: 2.8rem; font-weight: 300;">Akhil <i>&</i> Gaayathri</h1>
+            <div class="heart-divider">❤️❤️❤️</div>
             <img src="WhatsApp Image 2026-04-03 at 00.46.33.jpeg" alt="Couple" class="main-portrait">
             
             <div class="countdown-container">
@@ -225,14 +248,14 @@
         </div>
 
         <div class="luxury-card">
-            <span style="color: var(--accent); font-size: 0.6rem; letter-spacing: 2px; font-weight: 600;">THE WEDDING</span>
+            <span style="color: var(--accent); font-size: 0.6rem; letter-spacing: 2px; font-weight: 600;">THE WEDDING ❤️</span>
             <h3 style="font-family: 'Cormorant Garamond'; font-size: 1.8rem; margin: 10px 0;">13th May, 2026</h3>
             <p style="font-size: 0.85rem; opacity: 0.8;">Hampi Functional Hall, Tirumala<br>Muhurtham: 09:00 AM</p>
             <a onclick="showSheet('travel')" class="btn-text">Stay & Map Details</a>
         </div>
 
         <div class="luxury-card">
-            <span style="color: var(--accent); font-size: 0.6rem; letter-spacing: 2px; font-weight: 600;">THE RECEPTION</span>
+            <span style="color: var(--accent); font-size: 0.6rem; letter-spacing: 2px; font-weight: 600;">THE RECEPTION ❤️</span>
             <h3 style="font-family: 'Cormorant Garamond'; font-size: 1.8rem; margin: 10px 0;">21st May, 2026</h3>
             <p style="font-size: 0.85rem; opacity: 0.8;">Hotel Daspalla, Visakhapatnam<br>Starting 07:00 PM</p>
         </div>
@@ -295,7 +318,7 @@
     </div>
 
     <footer>
-        <div style="font-family: 'Pinyon Script'; font-size: 3rem; color: var(--accent); margin-bottom: 10px;">See you there!</div>
+        <div style="font-family: 'Pinyon Script'; font-size: 3rem; color: var(--accent); margin-bottom: 10px;">See you there! ❤️</div>
         <p style="letter-spacing: 3px; font-size: 0.8rem; opacity: 0.8; margin-bottom: 5px;">Contact: +91 70932 45918</p>
         <p style="letter-spacing: 3px; font-size: 0.7rem; opacity: 0.5;">AKHIL ❤️ GAAYATHRI 👩‍❤️‍👨 2026</p>
     </footer>
@@ -306,7 +329,27 @@
         function startExperience() {
             document.getElementById('intro').classList.add('opened');
             music.play().catch(e => console.log("Audio play blocked."));
-            setTimeout(() => { document.getElementById('intro').style.display = 'none'; }, 1500);
+            setTimeout(() => { 
+                document.getElementById('intro').style.display = 'none';
+                startHeartRain();
+            }, 1500);
+        }
+
+        // Heart Animation Logic
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart-particle');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            heart.style.fontSize = (Math.random() * 10 + 15) + 'px';
+            document.body.appendChild(heart);
+            
+            setTimeout(() => { heart.remove(); }, 6000);
+        }
+
+        function startHeartRain() {
+            setInterval(createHeart, 800);
         }
 
         function toggleMenu() { document.getElementById('navLinks').classList.toggle('active'); }
@@ -319,7 +362,6 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Countdown
         const weddingDate = new Date("May 13, 2026 05:00:00").getTime();
         setInterval(() => {
             const now = new Date().getTime();
