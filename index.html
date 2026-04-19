@@ -28,7 +28,7 @@
             line-height: 1.6;
         }
 
-        /* --- CONTINUOUS FLOATING HEARTS (BACKGROUND) --- */
+        /* --- CONTINUOUS FLOATING HEARTS (ENHANCED VISIBILITY) --- */
         .bg-heart-container {
             position: fixed;
             top: 0;
@@ -36,23 +36,25 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 1; /* Sits behind text and images */
+            z-index: 1; 
             overflow: hidden;
         }
 
         .drifting-heart {
             position: absolute;
-            bottom: -50px;
-            color: rgba(195, 65, 33, 0.2); /* Subtle transparency */
+            bottom: -60px;
+            /* Increased opacity from 0.2 to 0.4 for better visibility */
+            color: rgba(195, 65, 33, 0.4); 
             user-select: none;
             animation: driftUp linear forwards;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.3); /* Adds a slight glow to stand out */
         }
 
         @keyframes driftUp {
             0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.4; }
-            90% { opacity: 0.4; }
-            100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+            15% { opacity: 0.6; } /* Hearts become visible faster */
+            85% { opacity: 0.6; }
+            100% { transform: translateY(-115vh) rotate(360deg); opacity: 0; }
         }
 
         /* --- CLICK HEART ANIMATION (BURST) --- */
@@ -244,12 +246,12 @@
             setTimeout(() => { document.getElementById('intro').style.display = 'none'; }, 1500);
             
             // Initial Burst from center
-            for(let i=0; i<10; i++) {
+            for(let i=0; i<15; i++) {
                 createHeart(window.innerWidth/2, window.innerHeight/2);
             }
         }
 
-        // --- BACKGROUND CONTINUOUS RAIN ---
+        // --- ENHANCED BACKGROUND CONTINUOUS RAIN ---
         function spawnBackgroundHeart() {
             const heart = document.createElement('div');
             heart.className = 'drifting-heart';
@@ -258,10 +260,12 @@
             // Randomize position across entire width
             heart.style.left = Math.random() * 100 + 'vw';
             
-            // Randomize size and speed
-            const size = Math.random() * 15 + 10;
+            // Increased size range for more visibility (15px to 35px)
+            const size = Math.random() * 20 + 15;
             heart.style.fontSize = size + 'px';
-            const duration = Math.random() * 5 + 10; 
+            
+            // Randomize duration
+            const duration = Math.random() * 4 + 8; 
             heart.style.animationDuration = duration + 's';
             
             bgContainer.appendChild(heart);
@@ -269,14 +273,16 @@
             // Cleanup
             setTimeout(() => { heart.remove(); }, duration * 1000);
         }
-        setInterval(spawnBackgroundHeart, 1000);
+        
+        // Spawn hearts every 600ms (Faster than before for more symbols)
+        setInterval(spawnBackgroundHeart, 600);
 
         // --- INTERACTIVE CLICK BURST ---
         function spawnHearts(e) {
-            for(let i=0; i<6; i++) {
+            for(let i=0; i<8; i++) {
                 setTimeout(() => {
                     createHeart(e.clientX, e.clientY);
-                }, i * 100);
+                }, i * 80);
             }
         }
 
@@ -284,10 +290,10 @@
             const heart = document.createElement('div');
             heart.classList.add('heart-fly');
             heart.innerHTML = '❤️';
-            const offsetX = (Math.random() - 0.5) * 60;
+            const offsetX = (Math.random() - 0.5) * 100;
             heart.style.left = (x + offsetX) + 'px';
             heart.style.top = y + 'px';
-            const size = Math.random() * 15 + 15;
+            const size = Math.random() * 20 + 20;
             heart.style.fontSize = size + 'px';
             heart.style.animationDuration = (Math.random() * 2 + 1.5) + 's';
             document.body.appendChild(heart);
