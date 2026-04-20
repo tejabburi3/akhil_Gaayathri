@@ -28,7 +28,7 @@
             line-height: 1.6;
         }
 
-        /* --- BACKGROUND HEARTS --- */
+        /* --- PERFORMANCE OPTIMIZED BACKGROUND --- */
         .bg-heart-container {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -38,61 +38,60 @@
         .drifting-heart {
             position: absolute;
             bottom: -60px;
-            color: rgba(195, 65, 33, 0.6);
+            color: rgba(195, 65, 33, 0.4);
+            will-change: transform;
             animation: driftUp linear forwards;
-            text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
         }
 
         @keyframes driftUp {
-            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-            15% { opacity: 0.7; } 
-            85% { opacity: 0.7; }
-            100% { transform: translateY(-115vh) rotate(360deg); opacity: 0; }
+            0% { transform: translate3d(0, 0, 0) rotate(0deg); opacity: 0; }
+            15% { opacity: 0.6; }
+            85% { opacity: 0.6; }
+            100% { transform: translate3d(0, -115vh, 0) rotate(360deg); opacity: 0; }
         }
 
-        .heart-fly {
-            position: fixed;
-            color: var(--accent);
-            pointer-events: none;
-            z-index: 10000;
-            animation: flyUp 3s ease-out forwards;
-        }
-
-        @keyframes flyUp {
-            0% { transform: translateY(0) scale(0.5); opacity: 1; }
-            100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
-        }
-
-        /* --- INTRO & DOORS --- */
+        /* --- STAMP & DOOR ALIGNMENT --- */
         #intro {
-            position: fixed; width: 100%; height: 100vh; z-index: 9999;
-            display: flex; justify-content: center; align-items: center; perspective: 1000px;
+            position: fixed; top: 0; left: 0;
+            width: 100%; height: 100vh; z-index: 9999;
+            display: flex; justify-content: center; align-items: center;
         }
+
         .door {
             position: absolute; top: 0; width: 50%; height: 100%;
-            background: var(--accent); transition: transform 1.5s cubic-bezier(0.7, 0, 0.3, 1); z-index: 1;
+            background: var(--accent); 
+            transition: transform 1.2s cubic-bezier(0.7, 0, 0.3, 1); 
+            z-index: 1;
+            will-change: transform;
         }
         .door-left { left: 0; border-right: 1px solid rgba(255,255,255,0.1); }
         .door-right { right: 0; border-left: 1px solid rgba(255,255,255,0.1); }
-        #intro.opened .door-left { transform: translateX(-100%); }
-        #intro.opened .door-right { transform: translateX(100%); }
-        #intro.opened { pointer-events: none; visibility: hidden; transition: visibility 0s 1.5s; }
+
+        #intro.opened .door-left { transform: translate3d(-100%, 0, 0); }
+        #intro.opened .door-right { transform: translate3d(100%, 0, 0); }
+        #intro.opened .seal-wrapper { opacity: 0; transform: translate(-50%, -50%) scale(0.5); pointer-events: none; }
 
         .seal-wrapper {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            z-index: 10; text-align: center; cursor: pointer;
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            text-align: center;
+            cursor: pointer;
+            transition: opacity 0.5s ease, transform 0.5s ease;
         }
+
         .wax-seal {
             width: 110px; height: 110px; background: var(--wax);
             border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.4), 5px 10px 20px rgba(0,0,0,0.5);
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.4), 0 10px 30px rgba(0,0,0,0.5);
             animation: pulse 2.5s infinite ease-in-out;
         }
-        .seal-initials { font-family: 'Pinyon Script', cursive; color: white; font-size: 2.2rem; }
+        .seal-initials { font-family: 'Pinyon Script', cursive; color: white; font-size: 2.2rem; pointer-events: none; }
 
         @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
 
-        /* --- NAV --- */
+        /* --- NAVIGATION --- */
         nav {
             position: fixed; top: 0; width: 100%; padding: 15px 5%;
             display: flex; justify-content: space-between; align-items: center;
@@ -101,7 +100,10 @@
         }
         .logo { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; cursor: pointer; }
         .logo span { font-family: 'Pinyon Script', cursive; color: var(--accent); font-size: 1.5rem; }
+        
+        .menu-btn { cursor: pointer; z-index: 1001; }
         .menu-btn div { height: 2px; background-color: var(--navy); margin: 5px 0; width: 25px; }
+
         .nav-links {
             position: fixed; top: 0; right: -100%; width: 80%; height: 100vh;
             background: var(--white); display: flex; flex-direction: column;
@@ -110,7 +112,7 @@
         .nav-links.active { right: 0; }
         .nav-links a { text-decoration: none; color: var(--navy); font-size: 1rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; cursor: pointer; }
 
-        /* --- PAGES --- */
+        /* --- PAGES & CONTENT --- */
         .page-sheet { display: none; padding-top: 80px; min-height: 100vh; animation: fadeIn 0.8s ease; position: relative; z-index: 2; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -118,6 +120,7 @@
         .btn-text { color: var(--gold); font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; border-bottom: 1px solid var(--gold); cursor: pointer; margin-top: 15px; display: inline-block; }
 
         .main-portrait { width: 85%; max-width: 400px; height: 450px; margin: 20px auto; object-fit: cover; border-radius: 200px 200px 0 0; border: 5px solid var(--white); box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
+        
         .countdown-container { display: flex; justify-content: center; gap: 15px; margin: 25px 20px; background: var(--white); padding: 20px; border-radius: 8px; }
         .count-num { font-size: 1.8rem; font-family: 'Cormorant Garamond'; color: var(--accent); font-weight: 600; display: block; }
 
@@ -139,7 +142,7 @@
         @media (max-width: 768px) { .story-item { flex-direction: column; align-items: flex-start; gap: 20px; } }
     </style>
 </head>
-<body onclick="spawnHearts(event)">
+<body onclick="createClickHeart(event)">
 
     <div class="bg-heart-container" id="bgHearts"></div>
 
@@ -148,7 +151,7 @@
         <div class="door door-right"></div>
         <div class="seal-wrapper" onclick="startExperience(event)">
             <div class="wax-seal"><span class="seal-initials">A&G</span></div>
-            <p style="color: white; margin-top: 15px; letter-spacing: 3px;">TAP TO UNVEIL ❤️</p>
+            <p style="color: white; margin-top: 20px; letter-spacing: 4px; font-size: 0.7rem;">TAP TO UNVEIL ❤️</p>
         </div>
     </div>
 
@@ -172,9 +175,9 @@
             <img src="WhatsApp Image 2026-04-03 at 00.46.33.jpeg" alt="Couple" class="main-portrait">
             
             <div class="countdown-container">
-                <div class="count-item"><span class="count-num" id="days">00</span><span class="count-lab">Days</span></div>
-                <div class="count-item"><span class="count-num" id="hours">00</span><span class="count-lab">Hours</span></div>
-                <div class="count-item"><span class="count-num" id="mins">00</span><span class="count-lab">Mins</span></div>
+                <div class="count-item"><span class="count-num" id="days">00</span><span>Days</span></div>
+                <div class="count-item"><span class="count-num" id="hours">00</span><span>Hours</span></div>
+                <div class="count-item"><span class="count-num" id="mins">00</span><span>Mins</span></div>
             </div>
         </section>
 
@@ -204,7 +207,7 @@
             
             <div class="story-item">
                 <div class="story-content"><h4>2016 — The Spark</h4><p>Meeting at Gayatri Vidya Parishad College. A connection that was instant between lectures and labs.</p></div>
-                <div class="story-image-container"><img src="5.jpeg" class="story-image"></div>
+                <div class="story-image-container"><img src="4.jpeg" class="story-image"></div>
             </div>
 
             <div class="story-item">
@@ -229,12 +232,12 @@
             <div class="travel-card">
                 <h3 style="font-family: 'Cormorant Garamond'; margin-bottom: 10px;">1. WEDDING (TIRUMALA)</h3>
                 <p style="font-size: 0.9rem; margin-bottom: 20px;"><b>Hampi Functional Hall</b><br>Stay provided at venue.</p>
-                <iframe class="google-map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3877.2625026543464!2d79.34848557585501!3d13.67222449909241!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bb2b166099042b5%3A0xe10439f76a54f15a!2sHampi%20Functional%20Hall!5e0!3m2!1sen!2sin!4v1713516000000!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
+                <iframe class="google-map-iframe" src="https://maps.google.com/maps?q=Hampi%20Functional%20Hall%20Tirumala&t=&z=13&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy"></iframe>
             </div>
             <div class="travel-card">
                 <h3 style="font-family: 'Cormorant Garamond'; margin-bottom: 10px;">2. RECEPTION (VIZAG)</h3>
                 <p style="font-size: 0.9rem; margin-bottom: 20px;"><b>Hotel Daspalla</b><br>Stay arranged from 7 PM.</p>
-                <iframe class="google-map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3800.687258079069!2d83.30155097592476!3d17.712170393375815!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a3943198030231b%3A0x69614f146522776c!2sHotel%20Daspalla!5e0!3m2!1sen!2sin!4v1713516100000!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
+                <iframe class="google-map-iframe" src="https://maps.google.com/maps?q=Hotel%20Daspalla%20Visakhapatnam&t=&z=13&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy"></iframe>
             </div>
         </div>
     </div>
@@ -249,43 +252,42 @@
         const music = document.getElementById('bgMusic');
         const bgContainer = document.getElementById('bgHearts');
 
-        function startExperience(e) {
-            e.stopPropagation();
-            document.getElementById('intro').classList.add('opened');
-            music.play().catch(err => console.log("Audio blocked"));
-            setTimeout(() => { document.getElementById('intro').style.display = 'none'; }, 1500);
-            for(let i=0; i<15; i++) createHeart(window.innerWidth/2, window.innerHeight/2);
-        }
-
+        // Background heart logic (Throttled for performance)
         function spawnBackgroundHeart() {
+            if (document.hidden) return;
             const heart = document.createElement('div');
             heart.className = 'drifting-heart';
             heart.innerHTML = '❤️';
-            heart.style.left = Math.random() * 100 + 'vw';
-            const size = Math.random() * 20 + 15;
+            heart.style.left = Math.random() * 95 + 'vw';
+            const size = Math.random() * 15 + 12;
             heart.style.fontSize = size + 'px';
             const duration = Math.random() * 4 + 7; 
             heart.style.animationDuration = duration + 's';
             bgContainer.appendChild(heart);
-            setTimeout(() => { heart.remove(); }, duration * 1000);
+            setTimeout(() => heart.remove(), duration * 1000);
         }
-        setInterval(spawnBackgroundHeart, 500);
+        setInterval(spawnBackgroundHeart, 700);
 
-        function spawnHearts(e) {
-            for(let i=0; i<6; i++) {
-                setTimeout(() => createHeart(e.clientX, e.clientY), i * 100);
-            }
+        function startExperience(e) {
+            e.stopPropagation();
+            document.getElementById('intro').classList.add('opened');
+            music.play().catch(() => console.log("Audio blocked"));
+            setTimeout(() => { document.getElementById('intro').style.display = 'none'; }, 1500);
         }
 
-        function createHeart(x, y) {
+        function createClickHeart(e) {
             const heart = document.createElement('div');
-            heart.classList.add('heart-fly');
             heart.innerHTML = '❤️';
-            heart.style.left = (x + (Math.random() - 0.5) * 80) + 'px';
-            heart.style.top = y + 'px';
-            heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
+            heart.style.position = 'fixed';
+            heart.style.left = e.clientX + 'px';
+            heart.style.top = e.clientY + 'px';
+            heart.style.transform = 'translate(-50%, -50%)';
+            heart.style.pointerEvents = 'none';
+            heart.style.zIndex = '10000';
+            heart.style.color = 'var(--accent)';
+            heart.style.animation = 'driftUp 2s ease-out forwards';
             document.body.appendChild(heart);
-            setTimeout(() => heart.remove(), 3000);
+            setTimeout(() => heart.remove(), 2000);
         }
 
         function toggleMenu() { document.getElementById('navLinks').classList.toggle('active'); }
@@ -298,15 +300,17 @@
         }
 
         const weddingDate = new Date("May 13, 2026 09:00:00").getTime();
-        setInterval(() => {
+        function updateCountdown() {
             const now = new Date().getTime();
             const diff = weddingDate - now;
             if(diff > 0) {
-                document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
-                document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
-                document.getElementById('mins').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+                document.getElementById('days').innerText = Math.floor(diff / 86400000).toString().padStart(2, '0');
+                document.getElementById('hours').innerText = Math.floor((diff % 86400000) / 3600000).toString().padStart(2, '0');
+                document.getElementById('mins').innerText = Math.floor((diff % 3600000) / 60000).toString().padStart(2, '0');
             }
-        }, 1000);
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
 
         window.onload = () => showSheet('home');
     </script>
