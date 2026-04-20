@@ -18,7 +18,6 @@
             --white: #FFFFFF;
             --wax: #A32608;
             --transition-door: transform 1.2s cubic-bezier(0.7, 0, 0.3, 1);
-            --transition-ui: all 0.5s ease;
         }
         
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -33,13 +32,11 @@
             background-image: url('https://www.transparenttextures.com/patterns/natural-paper.png');
         }
 
-        /* --- HEART ANIMATIONS (INCREASED & FIXED) --- */
+        /* --- HEART ANIMATIONS --- */
         .bg-heart-container {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none; z-index: 1; overflow: hidden;
-            /* Flex fix for browser compatibility */
-            display: flex; flex-direction: column;
         }
 
         .drifting-heart {
@@ -70,18 +67,16 @@
             100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
         }
 
-        /* --- INTRO & LAG-FREE WAX SEAL --- */
+        /* --- INTRO & WAX SEAL --- */
         #intro {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: 9999;
-            display: flex; justify-content: center; align-items: center;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100vh;
+            z-index: 9999; display: flex; justify-content: center; align-items: center;
         }
 
         .door {
             position: absolute; top: 0; width: 50%; height: 100%;
-            background: var(--accent); 
-            transition: var(--transition-door); 
-            z-index: 1;
-            box-shadow: 0 0 50px rgba(0,0,0,0.2);
+            background: var(--accent); transition: var(--transition-door); z-index: 1;
         }
         .door-left { left: 0; border-right: 1px solid rgba(255,255,255,0.1); }
         .door-right { right: 0; border-left: 1px solid rgba(255,255,255,0.1); }
@@ -100,12 +95,12 @@
             position: absolute; top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             z-index: 10; text-align: center; cursor: pointer;
-            transition: all 0.5s ease;
         }
 
         .wax-seal {
-            width: 120px; height: 120px; background: var(--wax);
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            width: 120px; height: 120px;
+            background: var(--wax); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
             box-shadow: inset 0 0 20px rgba(0,0,0,0.4), 0 10px 30px rgba(0,0,0,0.5);
             animation: pulse 2.5s infinite ease-in-out;
         }
@@ -113,7 +108,7 @@
 
         @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
 
-        /* --- UI COMPONENTS --- */
+        /* --- UI --- */
         nav {
             position: fixed; top: 0; width: 100%; padding: 20px 7%;
             display: flex; justify-content: space-between; align-items: center;
@@ -132,12 +127,11 @@
             transition: 0.6s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: -10px 0 30px rgba(0,0,0,0.05);
         }
         .nav-links.active { right: 0; }
-        .nav-links a { text-decoration: none; color: var(--navy); font-size: 0.95rem; text-transform: uppercase; letter-spacing: 2.5px; font-weight: 400; cursor: pointer; }
+        .nav-links a { text-decoration: none; color: var(--navy); font-size: 0.95rem; text-transform: uppercase; letter-spacing: 2.5px; cursor: pointer; }
 
         .page-sheet { display: none; padding-top: 100px; min-height: 100vh; animation: fadeIn 0.8s ease; position: relative; z-index: 2; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* MODERN CARDS WITH WATERMARK */
         .luxury-card {
             background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px);
             padding: 40px 30px; text-align: center; margin: 20px auto;
@@ -161,14 +155,14 @@
         .count-num { font-size: 2.2rem; font-family: 'Cormorant Garamond'; color: var(--accent); font-weight: 600; display: block; }
         .count-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 2px; color: var(--navy); opacity: 0.6; }
 
-        /* --- TIMELINE --- */
+        /* TIMELINE */
         .timeline { position: relative; max-width: 600px; margin: 40px auto; padding: 0 20px; }
         .timeline::before { content: ''; position: absolute; left: 30px; top: 0; bottom: 0; width: 1px; background: var(--accent); opacity: 0.2; }
         .story-item { position: relative; padding-left: 60px; margin-bottom: 60px; text-align: left; }
         .story-item::before { content: '❤️'; position: absolute; left: 22px; top: 6px; font-size: 0.8rem; }
         .story-image { width: 100%; height: 260px; object-fit: cover; border-radius: 15px; margin-top: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
 
-        /* --- TRAVEL & MAPS --- */
+        /* TRAVEL */
         .travel-grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; padding: 20px; max-width: 1200px; margin: 0 auto; }
         .google-map-iframe { width: 100%; height: 350px; border: none; border-radius: 12px; margin-top: 15px; }
 
@@ -176,7 +170,6 @@
         footer .pinyon { font-family: 'Pinyon Script', cursive; font-size: 3rem; color: var(--accent); margin-bottom: 10px; }
 
         @media (max-width: 992px) { .travel-grid-container { grid-template-columns: 1fr; } }
-        @media (max-width: 768px) { .story-item { flex-direction: column; align-items: flex-start; gap: 20px; } .main-portrait { height: 380px; } .nav-links { width: 100%; } }
     </style>
 </head>
 <body onclick="createClickHeart(event)">
@@ -217,9 +210,9 @@
                 May 13th, 2026
             </p>
             
-            <div style="display: inline-block; position: relative; padding: 12px; border: 1.5px solid var(--gold-soft); border-radius: 220px 220px 25px 25px; margin-bottom: 25px; background: rgba(255,255,255,0.4);">
-                <img src="WhatsApp Image 2026-04-03 at 00.46.33.jpeg" alt="Couple Portrait" 
-                     style="width: 290px; height: 410px; object-fit: cover; border-radius: 200px 200px 15px 15px; display: block; box-shadow: 0 15px 35px rgba(0,0,0,0.12);">
+            <div style="display: inline-block; position: relative; padding: 10px; border: 1px solid var(--gold-soft); border-radius: 200px 200px 20px 20px; margin-bottom: 20px;">
+                <img src="WhatsApp Image 2026-04-03 at 00.46.33.jpeg" alt="Couple" 
+                     style="width: 280px; height: 400px; object-fit: cover; border-radius: 190px 190px 15px 15px; display: block; box-shadow: 0 15px 35px rgba(0,0,0,0.1);">
             </div>
             
             <div class="countdown-container">
@@ -282,13 +275,14 @@
                 <span style="color: var(--gold); font-size: 0.65rem; letter-spacing: 3px; font-weight: 600;">THE CEREMONY</span>
                 <h3 style="font-family: 'Cormorant Garamond'; font-size: 1.8rem; margin: 10px 0;">Hampi Functional Hall</h3>
                 <p style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 15px;">Tirumala, Andhra Pradesh</p>
-                <iframe class="google-map-iframe" src="https://maps.google.com/maps?q=Hampi%20Functional%20Hall%20Tirumala&t=&z=13&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy"></iframe>
+                <iframe class="google-map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3877.3060711910636!2d79.3484852!3d13.6695628!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bb2b1527712f9e7%3A0xc48c03e670404499!2sHampi%20Function%20Hall!5e0!3m2!1sen!2sin!4v1713500000000" allowfullscreen="" loading="lazy"></iframe>
             </div>
+
             <div class="luxury-card" style="max-width: 100%; margin: 10px;">
                 <span style="color: var(--gold); font-size: 0.65rem; letter-spacing: 3px; font-weight: 600;">THE CELEBRATION</span>
                 <h3 style="font-family: 'Cormorant Garamond'; font-size: 1.8rem; margin: 10px 0;">Hotel Daspalla</h3>
                 <p style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 15px;">Jagadamba Junction, Visakhapatnam</p>
-                <iframe class="google-map-iframe" src="http://googlehttps://maps.google.com/maps?q=Hotel%20Daspalla%20Visakhapatnam&t=&z=13&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy"></iframe>
+                <iframe class="google-map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3800.000000000000!2d83.3000000!3d17.7000000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a39431776566453%3A0x675862a98f1262d!2sHotel%20Daspalla!5e0!3m2!1sen!2sin!4v1713500000000" allowfullscreen="" loading="lazy"></iframe>
             </div>
         </div>
     </div>
@@ -316,7 +310,7 @@
             }, 1200);
 
             // Explosion of hearts on start
-            for(let i=0; i<20; i++) setTimeout(() => createHeart(window.innerWidth/2, window.innerHeight/2), i * 50);
+            for(let i=0; i<30; i++) setTimeout(() => createHeart(window.innerWidth/2, window.innerHeight/2), i * 40);
         }
 
         function showSheet(id) {
@@ -342,11 +336,11 @@
             container.appendChild(heart);
             setTimeout(() => heart.remove(), duration * 1000);
         }
-        setInterval(spawnBackgroundHeart, 600); // Higher frequency
+        setInterval(spawnBackgroundHeart, 400); // Doubled frequency
 
         function createClickHeart(e) {
-            for(let i=0; i<6; i++) {
-                setTimeout(() => createHeart(e.clientX, e.clientY), i * 100);
+            for(let i=0; i<8; i++) { // Increased click heart count
+                setTimeout(() => createHeart(e.clientX, e.clientY), i * 80);
             }
         }
 
@@ -354,14 +348,13 @@
             const heart = document.createElement('div');
             heart.className = 'heart-fly';
             heart.innerHTML = '❤️';
-            heart.style.left = (x + (Math.random() - 0.5) * 50) + 'px';
+            heart.style.left = (x + (Math.random() - 0.5) * 80) + 'px';
             heart.style.top = y + 'px';
             heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
             document.body.appendChild(heart);
             setTimeout(() => heart.remove(), 2500);
         }
 
-        // Countdown Logic
         const weddingDate = new Date("May 13, 2026 09:00:00").getTime();
         function updateCountdown() {
             const now = new Date().getTime();
