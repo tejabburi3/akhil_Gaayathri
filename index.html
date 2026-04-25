@@ -167,13 +167,38 @@
         @media (max-width: 992px) {
             .menu-btn { display: block; }
             .nav-links {
-                position: fixed; top: 80px; right: -100%; width: 250px; height: auto;
+                position: fixed; top: 100px; right: -100%; width: 250px; height: auto;
                 background: white; flex-direction: column; padding: 40px;
                 border-radius: 30px; box-shadow: 0 15px 40px rgba(0,0,0,0.1);
                 transition: 0.5s;
             }
             .nav-links.active { right: 5%; }
         }
+
+        /* --- IMAGE SLIDER --- */
+        .image-slider-container {
+            width: 100%;
+            max-width: 600px;
+            height: 400px;
+            margin: 40px auto;
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .slider-wrapper { width: 100%; height: 100%; }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .slide.active { opacity: 1; }
 
         /* --- CONTENT STYLES --- */
         .page-sheet { display: none; padding-top: 120px; min-height: 100vh; animation: fadeIn 0.8s ease; position: relative; z-index: 2; }
@@ -185,10 +210,6 @@
             border-radius: 20px; max-width: 500px; width: 90%;
             border: 1px solid rgba(255, 255, 255, 0.6); box-shadow: 0 15px 45px rgba(0,0,0,0.03);
             position: relative; overflow: hidden;
-        }
-        .luxury-card::after {
-            content: '✿'; position: absolute; bottom: -20px; right: -10px;
-            font-size: 9rem; color: var(--gold); opacity: 0.05; pointer-events: none;
         }
 
         .btn-text {
@@ -252,11 +273,8 @@
 
     <div id="home" class="page-sheet">
         <section style="text-align: center; padding: 20px; position: relative;">
-            <div style="position: absolute; top: 10%; left: 50%; transform: translateX(-50%); font-size: 15rem; color: var(--gold); opacity: 0.03; pointer-events: none; z-index: -1; font-family: serif;">✿</div>
-
             <span style="letter-spacing: 5px; font-size: 0.7rem; color: var(--gold); font-weight: 600;">SAVE THE DATE</span>
             <h1 style="font-family: 'Cormorant Garamond'; font-size: 3.5rem; font-weight: 300; margin: 10px 0 5px 0;">Akhil <i>&</i> Gaayathri</h1>
-            
             <p style="font-family: 'Inter'; font-size: 0.9rem; letter-spacing: 4px; color: var(--navy); font-weight: 400; margin-bottom: 25px; text-transform: uppercase;">
                 May 13th, 2026
             </p>
@@ -272,7 +290,8 @@
                 <div class="count-item"><span class="count-num" id="mins">00</span><span class="count-label">Min</span></div>
             </div>
         </section>
-         <div class="image-slider-container">
+
+        <div class="image-slider-container">
             <div class="slider-wrapper" id="mainSlider">
                 <img src="1.jpeg" class="slide active" alt="Moment 1">
                 <img src="2.jpeg" class="slide" alt="Moment 2">
@@ -336,14 +355,14 @@
                 <span style="color: var(--gold); font-size: 0.65rem; letter-spacing: 3px; font-weight: 600;">THE CEREMONY</span>
                 <h3 style="font-family: 'Cormorant Garamond'; font-size: 1.8rem; margin: 10px 0;">Hampi Functional Hall</h3>
                 <p style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 15px;">Tirumala, Andhra Pradesh</p>
-                <iframe class="google-map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15551.48831627916!2d79.33649515!3d13.6745108!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a4d46d03099955d%3A0xc39f28d8b9826a79!2sTirumala%2C%20Andhra%20Pradesh!5e0!3m2!1sen!2sin!4v1714030000000!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
+                <iframe class="google-map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15505.748243644917!2d79.3361819!3d13.6829767!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a4d4b1a646c0d8f%3A0xc07a8e7a683a4f8!2sTirumala%2C%20Andhra%20Pradesh!5e0!3m2!1sen!2sin!4v1713955000000!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
             </div>
 
             <div class="luxury-card" style="max-width: 100%; margin: 10px;">
                 <span style="color: var(--gold); font-size: 0.65rem; letter-spacing: 3px; font-weight: 600;">THE CELEBRATION</span>
                 <h3 style="font-family: 'Cormorant Garamond'; font-size: 1.8rem; margin: 10px 0;">Hotel Daspalla</h3>
                 <p style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 15px;">Jagadamba Junction, Visakhapatnam</p>
-                <iframe class="google-map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3800.7027415446054!2d83.3005886!3d17.7115169!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a394317f22557e1%3A0x600b3e6e88d1d86e!2sHotel%20Daspalla!5e0!3m2!1sen!2sin!4v1714030000000!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
+                <iframe class="google-map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3800.7431528624135!2d83.300644315!3d17.7095698!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a39433e55555555%3A0x67399f9798725841!2sHotel%20Daspalla!5e0!3m2!1sen!2sin!4v1713955000000!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
             </div>
         </div>
     </div>
@@ -413,6 +432,17 @@
             setTimeout(() => heart.remove(), 2500);
         }
 
+        // --- IMAGE SLIDER LOGIC ---
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        setInterval(nextSlide, 3000);
+
+        // --- COUNTDOWN LOGIC ---
         const weddingDate = new Date("May 13, 2026 09:00:00").getTime();
         function updateCountdown() {
             const now = new Date().getTime();
