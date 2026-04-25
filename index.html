@@ -108,28 +108,75 @@
 
         @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
 
-        /* --- UI --- */
+        /* --- UI / NAVIGATION --- */
         nav {
-            position: fixed; top: 0; width: 100%; padding: 20px 7%;
-            display: flex; justify-content: space-between; align-items: center;
-            z-index: 1000; background: rgba(250, 247, 242, 0.95);
-            backdrop-filter: blur(10px); border-bottom: 1px solid rgba(26, 42, 78, 0.05);
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1200px;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 100px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
         }
-        .logo { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; cursor: pointer; letter-spacing: 1px; }
+
+        .logo { 
+            font-family: 'Cormorant Garamond', serif; 
+            font-size: 1.1rem; font-weight: 600; cursor: pointer; letter-spacing: 1px; 
+            color: var(--navy);
+        }
         .logo span { font-family: 'Pinyon Script', cursive; color: var(--accent); font-size: 1.5rem; }
-        .menu-btn { cursor: pointer; z-index: 1001; }
-        .menu-btn div { height: 1.5px; background-color: var(--navy); margin: 6px 0; width: 25px; }
 
         .nav-links {
-            position: fixed; top: 0; right: -100%; width: 75%; height: 100vh;
-            background: var(--white); display: flex; flex-direction: column;
-            justify-content: center; align-items: center; gap: 30px; list-style: none;
-            transition: 0.6s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: -10px 0 30px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            list-style: none;
         }
-        .nav-links.active { right: 0; }
-        .nav-links a { text-decoration: none; color: var(--navy); font-size: 0.95rem; text-transform: uppercase; letter-spacing: 2.5px; cursor: pointer; }
 
-        .page-sheet { display: none; padding-top: 100px; min-height: 100vh; animation: fadeIn 0.8s ease; position: relative; z-index: 2; }
+        .nav-links a { 
+            text-decoration: none; color: var(--navy); 
+            font-size: 0.85rem; font-weight: 500;
+            text-transform: uppercase; letter-spacing: 1px; cursor: pointer; 
+            transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--accent); }
+
+        .nav-rsvp-btn {
+            background: var(--accent);
+            color: white !important;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 600 !important;
+            box-shadow: 0 4px 15px rgba(195, 65, 33, 0.3);
+            transition: transform 0.3s ease !important;
+        }
+
+        .menu-btn { display: none; cursor: pointer; }
+        .menu-btn div { height: 2px; background-color: var(--navy); margin: 5px 0; width: 25px; }
+
+        @media (max-width: 992px) {
+            .menu-btn { display: block; }
+            .nav-links {
+                position: fixed; top: 80px; right: -100%; width: 250px; height: auto;
+                background: white; flex-direction: column; padding: 40px;
+                border-radius: 30px; box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+                transition: 0.5s;
+            }
+            .nav-links.active { right: 5%; }
+        }
+
+        /* --- CONTENT STYLES --- */
+        .page-sheet { display: none; padding-top: 120px; min-height: 100vh; animation: fadeIn 0.8s ease; position: relative; z-index: 2; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         .luxury-card {
@@ -155,14 +202,13 @@
         .count-num { font-size: 2.2rem; font-family: 'Cormorant Garamond'; color: var(--accent); font-weight: 600; display: block; }
         .count-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 2px; color: var(--navy); opacity: 0.6; }
 
-        /* TIMELINE */
+        /* TIMELINE & TRAVEL */
         .timeline { position: relative; max-width: 600px; margin: 40px auto; padding: 0 20px; }
         .timeline::before { content: ''; position: absolute; left: 30px; top: 0; bottom: 0; width: 1px; background: var(--accent); opacity: 0.2; }
         .story-item { position: relative; padding-left: 60px; margin-bottom: 60px; text-align: left; }
         .story-item::before { content: '❤️'; position: absolute; left: 22px; top: 6px; font-size: 0.8rem; }
         .story-image { width: 100%; height: 260px; object-fit: cover; border-radius: 15px; margin-top: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
 
-        /* TRAVEL */
         .travel-grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; padding: 20px; max-width: 1200px; margin: 0 auto; }
         .google-map-iframe { width: 100%; height: 350px; border: none; border-radius: 12px; margin-top: 15px; }
 
@@ -191,12 +237,17 @@
 
     <nav>
         <div class="logo" onclick="showSheet('home')">AKHIL <span>&</span> GAAYATHRI</div>
-        <div class="menu-btn" onclick="toggleMenu()"><div></div><div></div></div>
+        
         <ul class="nav-links" id="navLinks">
             <li><a onclick="closeMenu('home')">Home</a></li>
             <li><a onclick="closeMenu('story')">Our Story</a></li>
             <li><a onclick="closeMenu('travel')">Travel Info</a></li>
+            <li><a href="tel:+917093245918" class="nav-rsvp-btn">Contact Us</a></li>
         </ul>
+
+        <div class="menu-btn" onclick="toggleMenu()">
+            <div></div><div></div><div></div>
+        </div>
     </nav>
 
     <div id="home" class="page-sheet">
@@ -276,14 +327,14 @@
                 <span style="color: var(--gold); font-size: 0.65rem; letter-spacing: 3px; font-weight: 600;">THE CEREMONY</span>
                 <h3 style="font-family: 'Cormorant Garamond'; font-size: 1.8rem; margin: 10px 0;">Hampi Functional Hall</h3>
                 <p style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 15px;">Tirumala, Andhra Pradesh</p>
-                <iframe class="google-map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3877.3060711910636!2d79.3484852!3d13.6695628!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bb2b1527712f9e7%3A0xc48c03e670404499!2sHampi%20Function%20Hall!5e0!3m2!1sen!2sin!4v1713500000000" allowfullscreen="" loading="lazy"></iframe>
+                <iframe class="google-map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15551.48831627916!2d79.33649515!3d13.6745108!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a4d46d03099955d%3A0xc39f28d8b9826a79!2sTirumala%2C%20Andhra%20Pradesh!5e0!3m2!1sen!2sin!4v1714030000000!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
             </div>
 
             <div class="luxury-card" style="max-width: 100%; margin: 10px;">
                 <span style="color: var(--gold); font-size: 0.65rem; letter-spacing: 3px; font-weight: 600;">THE CELEBRATION</span>
                 <h3 style="font-family: 'Cormorant Garamond'; font-size: 1.8rem; margin: 10px 0;">Hotel Daspalla</h3>
                 <p style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 15px;">Jagadamba Junction, Visakhapatnam</p>
-                <iframe class="google-map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3800.000000000000!2d83.3000000!3d17.7000000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a39431776566453%3A0x675862a98f1262d!2sHotel%20Daspalla!5e0!3m2!1sen!2sin!4v1713500000000" allowfullscreen="" loading="lazy"></iframe>
+                <iframe class="google-map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3800.7027415446054!2d83.3005886!3d17.7115169!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a394317f22557e1%3A0x600b3e6e88d1d86e!2sHotel%20Daspalla!5e0!3m2!1sen!2sin!4v1714030000000!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
             </div>
         </div>
     </div>
@@ -303,14 +354,12 @@
             intro.classList.add('opened');
             music.play().catch(() => console.log("Audio blocked"));
             
-            // COMPLETE REMOVAL OF INTRO AFTER ANIMATION
             setTimeout(() => { 
                 intro.style.opacity = '0';
                 intro.style.pointerEvents = 'none';
                 setTimeout(() => { intro.style.display = 'none'; }, 1000);
             }, 1200);
 
-            // Explosion of hearts on start
             for(let i=0; i<30; i++) setTimeout(() => createHeart(window.innerWidth/2, window.innerHeight/2), i * 40);
         }
 
@@ -324,7 +373,6 @@
         function toggleMenu() { document.getElementById('navLinks').classList.toggle('active'); }
         function closeMenu(id) { document.getElementById('navLinks').classList.remove('active'); showSheet(id); }
 
-        // INCREASED BACKGROUND HEART SPAWN RATE
         function spawnBackgroundHeart() {
             const container = document.getElementById('bgHearts');
             const heart = document.createElement('div');
@@ -337,10 +385,10 @@
             container.appendChild(heart);
             setTimeout(() => heart.remove(), duration * 1000);
         }
-        setInterval(spawnBackgroundHeart, 400); // Doubled frequency
+        setInterval(spawnBackgroundHeart, 400);
 
         function createClickHeart(e) {
-            for(let i=0; i<8; i++) { // Increased click heart count
+            for(let i=0; i<8; i++) {
                 setTimeout(() => createHeart(e.clientX, e.clientY), i * 80);
             }
         }
