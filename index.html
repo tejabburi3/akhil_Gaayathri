@@ -42,15 +42,15 @@
         .drifting-heart {
             position: absolute;
             bottom: -60px;
-            color: rgba(195, 65, 33, 0.3);
+            color: rgba(195, 65, 33, 0.4);
             will-change: transform;
             animation: driftUp linear forwards;
         }
 
         @keyframes driftUp {
             0% { transform: translate3d(0, 0, 0) rotate(0deg); opacity: 0; }
-            15% { opacity: 0.5; }
-            85% { opacity: 0.5; }
+            15% { opacity: 0.6; }
+            85% { opacity: 0.6; }
             100% { transform: translate3d(0, -115vh, 0) rotate(360deg); opacity: 0; }
         }
 
@@ -59,7 +59,7 @@
             color: var(--accent);
             pointer-events: none;
             z-index: 10000;
-            animation: flyUp 2.5s ease-out forwards;
+            animation: flyUp 3s ease-out forwards;
         }
 
         @keyframes flyUp {
@@ -111,13 +111,17 @@
         /* --- UI / NAVIGATION --- */
         nav {
             position: fixed;
-            top: 20px; left: 50%;
+            top: 20px;
+            left: 50%;
             transform: translateX(-50%);
-            width: 90%; max-width: 1200px;
-            padding: 12px 30px;
-            display: flex; justify-content: space-between; align-items: center;
+            width: 90%;
+            max-width: 1200px;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             z-index: 1000;
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.4);
@@ -125,61 +129,93 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
         }
 
-        .logo { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 600; cursor: pointer; letter-spacing: 1px; color: var(--navy); }
-        .logo span { font-family: 'Pinyon Script', cursive; color: var(--accent); font-size: 1.4rem; }
+        .logo { 
+            font-family: 'Cormorant Garamond', serif; 
+            font-size: 1.1rem; font-weight: 600; cursor: pointer; letter-spacing: 1px; 
+            color: var(--navy);
+        }
+        .logo span { font-family: 'Pinyon Script', cursive; color: var(--accent); font-size: 1.5rem; }
 
-        .nav-links { display: flex; align-items: center; gap: 25px; list-style: none; }
-        .nav-links a { text-decoration: none; color: var(--navy); font-size: 0.8rem; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: color 0.3s; }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a { 
+            text-decoration: none; color: var(--navy); 
+            font-size: 0.85rem; font-weight: 500;
+            text-transform: uppercase; letter-spacing: 1px; cursor: pointer; 
+            transition: color 0.3s;
+        }
         .nav-links a:hover { color: var(--accent); }
 
-        .nav-rsvp-btn { background: var(--accent); color: white !important; padding: 8px 20px; border-radius: 50px; font-weight: 600 !important; }
+        .nav-rsvp-btn {
+            background: var(--accent);
+            color: white !important;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 600 !important;
+            box-shadow: 0 4px 15px rgba(195, 65, 33, 0.3);
+            transition: transform 0.3s ease !important;
+        }
 
         .menu-btn { display: none; cursor: pointer; }
-        .menu-btn div { height: 2px; background-color: var(--navy); margin: 5px 0; width: 22px; }
+        .menu-btn div { height: 2px; background-color: var(--navy); margin: 5px 0; width: 25px; }
 
         @media (max-width: 992px) {
             .menu-btn { display: block; }
             .nav-links {
-                position: fixed; top: 80px; right: -100%; width: 220px;
-                background: white; flex-direction: column; padding: 30px;
-                border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-                transition: 0.4s ease;
+                position: fixed; top: 80px; right: -100%; width: 250px; height: auto;
+                background: white; flex-direction: column; padding: 40px;
+                border-radius: 30px; box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+                transition: 0.5s;
             }
             .nav-links.active { right: 5%; }
         }
 
         /* --- CONTENT STYLES --- */
-        .page-sheet { display: none; padding-top: 110px; min-height: 100vh; animation: fadeIn 0.8s ease; position: relative; z-index: 2; padding-bottom: 50px; }
+        .page-sheet { display: none; padding-top: 120px; min-height: 100vh; animation: fadeIn 0.8s ease; position: relative; z-index: 2; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         .luxury-card {
             background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px);
-            padding: 35px 25px; text-align: center; margin: 20px auto;
+            padding: 40px 30px; text-align: center; margin: 20px auto;
             border-radius: 20px; max-width: 500px; width: 90%;
             border: 1px solid rgba(255, 255, 255, 0.6); box-shadow: 0 15px 45px rgba(0,0,0,0.03);
+            position: relative; overflow: hidden;
+        }
+        .luxury-card::after {
+            content: '✿'; position: absolute; bottom: -20px; right: -10px;
+            font-size: 9rem; color: var(--gold); opacity: 0.05; pointer-events: none;
         }
 
-        .btn-text { color: var(--gold); font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; border-bottom: 1px solid var(--gold); cursor: pointer; margin-top: 15px; display: inline-block; text-decoration: none; }
+        .btn-text {
+            color: var(--gold); font-size: 0.7rem; letter-spacing: 2px;
+            text-transform: uppercase; font-weight: 600; border-bottom: 1px solid var(--gold);
+            cursor: pointer; margin-top: 20px; display: inline-block;
+        }
 
-        .countdown-container { display: flex; justify-content: center; gap: 12px; margin: 25px 0; }
-        .count-item { text-align: center; min-width: 60px; }
-        .count-num { font-size: 1.8rem; font-family: 'Cormorant Garamond'; color: var(--accent); font-weight: 600; display: block; }
-        .count-label { font-size: 0.55rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--navy); opacity: 0.6; }
+        .countdown-container { display: flex; justify-content: center; gap: 15px; margin: 30px 0; }
+        .count-item { text-align: center; }
+        .count-num { font-size: 2.2rem; font-family: 'Cormorant Garamond'; color: var(--accent); font-weight: 600; display: block; }
+        .count-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 2px; color: var(--navy); opacity: 0.6; }
 
         /* TIMELINE & TRAVEL */
         .timeline { position: relative; max-width: 600px; margin: 40px auto; padding: 0 20px; }
         .timeline::before { content: ''; position: absolute; left: 30px; top: 0; bottom: 0; width: 1px; background: var(--accent); opacity: 0.2; }
-        .story-item { position: relative; padding-left: 60px; margin-bottom: 50px; text-align: left; }
+        .story-item { position: relative; padding-left: 60px; margin-bottom: 60px; text-align: left; }
         .story-item::before { content: '❤️'; position: absolute; left: 22px; top: 6px; font-size: 0.8rem; }
-        .story-image { width: 100%; height: 250px; object-fit: cover; border-radius: 15px; margin-top: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+        .story-image { width: 100%; height: 260px; object-fit: cover; border-radius: 15px; margin-top: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
 
-        .travel-grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding: 20px; max-width: 1100px; margin: 0 auto; }
-        .google-map-iframe { width: 100%; height: 300px; border: none; border-radius: 12px; margin-top: 15px; }
+        .travel-grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; padding: 20px; max-width: 1200px; margin: 0 auto; }
+        .google-map-iframe { width: 100%; height: 350px; border: none; border-radius: 12px; margin-top: 15px; }
 
-        footer { background: var(--navy); color: white; padding: 60px 20px; text-align: center; margin-top: auto; }
-        footer .pinyon { font-family: 'Pinyon Script', cursive; font-size: 2.5rem; color: var(--accent); margin-bottom: 10px; }
+        footer { background: var(--navy); color: white; padding: 70px 20px; text-align: center; margin-top: auto; }
+        footer .pinyon { font-family: 'Pinyon Script', cursive; font-size: 3rem; color: var(--accent); margin-bottom: 10px; }
 
-        @media (max-width: 768px) { .travel-grid-container { grid-template-columns: 1fr; } }
+        @media (max-width: 992px) { .travel-grid-container { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body onclick="createClickHeart(event)">
@@ -191,35 +227,43 @@
         <div class="door door-right"></div>
         <div class="seal-wrapper" onclick="startExperience(event)">
             <div class="wax-seal"><span class="seal-initials">A&G</span></div>
-            <p style="color: white; margin-top: 25px; letter-spacing: 5px; font-size: 0.7rem; font-weight: 600;">TAP TO UNVEIL ❤️</p>
+            <p style="color: white; margin-top: 25px; letter-spacing: 5px; font-size: 0.75rem; font-weight: 600;">TAP TO UNVEIL ❤️</p>
         </div>
     </div>
-    
+
     <audio id="bgMusic" loop>
         <source src="Geetha Govindam - Vachindamma Bgm.mp3" type="audio/mpeg">
     </audio>
 
     <nav>
         <div class="logo" onclick="showSheet('home')">AKHIL <span>&</span> GAAYATHRI</div>
+        
         <ul class="nav-links" id="navLinks">
             <li><a onclick="closeMenu('home')">Home</a></li>
             <li><a onclick="closeMenu('story')">Our Story</a></li>
-            <li><a onclick="closeMenu('travel')">Travel</a></li>
-            <li><a href="tel:+917093245918" class="nav-rsvp-btn">Contact</a></li>
+            <li><a onclick="closeMenu('travel')">Travel Info</a></li>
+            <li><a href="tel:+917093245918" class="nav-rsvp-btn">Contact Us</a></li>
         </ul>
+
         <div class="menu-btn" onclick="toggleMenu()">
             <div></div><div></div><div></div>
         </div>
     </nav>
 
     <div id="home" class="page-sheet">
-        <section style="text-align: center; padding: 0 20px;">
-            <span style="letter-spacing: 5px; font-size: 0.65rem; color: var(--gold); font-weight: 600;">SAVE THE DATE</span>
-            <h1 style="font-family: 'Cormorant Garamond'; font-size: 3rem; font-weight: 300; margin: 10px 0 5px 0;">Akhil <i>&</i> Gaayathri</h1>
-            <p style="font-family: 'Inter'; font-size: 0.85rem; letter-spacing: 3px; color: var(--navy); font-weight: 400; margin-bottom: 25px; text-transform: uppercase;">May 13th, 2026</p>
+        <section style="text-align: center; padding: 20px; position: relative;">
+            <div style="position: absolute; top: 10%; left: 50%; transform: translateX(-50%); font-size: 15rem; color: var(--gold); opacity: 0.03; pointer-events: none; z-index: -1; font-family: serif;">✿</div>
+
+            <span style="letter-spacing: 5px; font-size: 0.7rem; color: var(--gold); font-weight: 600;">SAVE THE DATE</span>
+            <h1 style="font-family: 'Cormorant Garamond'; font-size: 3.5rem; font-weight: 300; margin: 10px 0 5px 0;">Akhil <i>&</i> Gaayathri</h1>
             
-            <div style="display: inline-block; position: relative; padding: 8px; border: 1px solid var(--gold-soft); border-radius: 200px 200px 20px 20px; margin-bottom: 20px;">
-                <img src="WhatsApp Image 2026-04-03 at 00.46.33.jpeg" alt="Couple" style="width: 260px; height: 380px; object-fit: cover; border-radius: 190px 190px 15px 15px; display: block; box-shadow: 0 15px 35px rgba(0,0,0,0.1);">
+            <p style="font-family: 'Inter'; font-size: 0.9rem; letter-spacing: 4px; color: var(--navy); font-weight: 400; margin-bottom: 25px; text-transform: uppercase;">
+                May 13th, 2026
+            </p>
+            
+            <div style="display: inline-block; position: relative; padding: 10px; border: 1px solid var(--gold-soft); border-radius: 200px 200px 20px 20px; margin-bottom: 20px;">
+                <img src="WhatsApp Image 2026-04-03 at 00.46.33.jpeg" alt="Couple" 
+                     style="width: 280px; height: 400px; object-fit: cover; border-radius: 190px 190px 15px 15px; display: block; box-shadow: 0 15px 35px rgba(0,0,0,0.1);">
             </div>
             
             <div class="countdown-container">
@@ -230,74 +274,85 @@
         </section>
 
         <div class="luxury-card">
-            <h4 style="font-family: 'Pinyon Script'; font-size: 2.5rem; color: var(--accent); line-height: 1;">Our Roots</h4>
-            <p style="font-size: 0.9rem; margin-top: 15px;">It all began in 2016 at <b>GVP College</b>. From shared classes to a decade of memories, we've grown up together.</p>
-            <a onclick="showSheet('story')" class="btn-text">READ OUR STORY</a>
+            <h4 style="font-family: 'Pinyon Script'; font-size: 3rem; color: var(--accent); line-height: 1;">Our Roots</h4>
+            <p style="font-size: 0.95rem; margin-top: 15px;">It all began in 2016 at <b>GVP College</b>. From the same branch and section to a decade of memories, we've grown up together.</p>
+            <a onclick="showSheet('story')" class="btn-text">OUR STORY</a>
         </div>
 
         <div class="luxury-card">
             <span style="color: var(--accent); font-size: 0.6rem; letter-spacing: 3px; font-weight: 600; text-transform: uppercase;">THE WEDDING</span>
-            <h3 style="font-family: 'Cormorant Garamond'; font-size: 1.8rem; margin: 8px 0;">13th May, 2026</h3>
-            <p style="font-size: 0.8rem; opacity: 0.8;">Hampi Functional Hall, Tirumala<br>Muhurtham: 09:00 AM</p>
-            <a onclick="showSheet('travel')" class="btn-text">VIEW LOCATION</a>
+            <h3 style="font-family: 'Cormorant Garamond'; font-size: 2rem; margin: 10px 0;">13th May, 2026</h3>
+            <p style="font-size: 0.85rem; opacity: 0.8;">Hampi Functional Hall, Tirumala<br>Muhurtham: 09:00 AM</p>
+            <a onclick="showSheet('travel')" class="btn-text">LOCATION MAPS</a>
+        </div>
+
+        <div class="luxury-card">
+            <span style="color: var(--accent); font-size: 0.6rem; letter-spacing: 3px; font-weight: 600; text-transform: uppercase;">THE RECEPTION</span>
+            <h3 style="font-family: 'Cormorant Garamond'; font-size: 2rem; margin: 10px 0;">21st May, 2026</h3>
+            <p style="font-size: 0.85rem; opacity: 0.8;">Hotel Daspalla, Visakhapatnam<br>Starting 07:00 PM</p>
+            <a onclick="showSheet('travel')" class="btn-text">LOCATION MAPS</a>
         </div>
     </div>
 
     <div id="story" class="page-sheet">
-        <h2 style="text-align: center; font-family: 'Pinyon Script', cursive; font-size: 3.5rem; color: var(--accent);">Our Journey</h2>
+        <h2 style="text-align: center; font-family: 'Pinyon Script', cursive; font-size: 4rem; color: var(--accent);">Our Journey</h2>
         <div class="timeline">
             <div class="story-item">
                 <h4>2016 — The Spark</h4>
                 <p>Meeting at Gayatri Vidya Parishad College. A connection that was instant between lectures and labs.</p>
-                <img src="5.jpeg" class="story-image" alt="College days">
+                <img src="5.jpeg" class="story-image" alt="Early Days">
             </div>
             <div class="story-item">
-                <h4>2018 — The Choice</h4>
-                <p>The year we realized friendship was just the beginning. We chose forever.</p>
-                <img src="3.jpeg" class="story-image" alt="Beginning">
+                <h4>2018 — The Decision</h4>
+                <p>The year we realized friendship wasn't enough. We chose forever.</p>
+                <img src="3.jpeg" class="story-image" alt="The Start">
+            </div>
+            <div class="story-item">
+                <h4>2023-2026 — Distance</h4>
+                <p>3 years of long distance. Miles apart, but always connected through every high and low.</p>
+                <img src="6.jpeg" class="story-image" alt="Miles Apart">
             </div>
             <div class="story-item">
                 <h4>2026 — The Promise</h4>
-                <p>10 years later, we are finally coming home to each other to start our new chapter.</p>
-                <img src="2.jpeg" class="story-image" alt="Commitment">
+                <p>10 years later, we are finally coming home to each other.</p>
+                <img src="2.jpeg" class="story-image" alt="Coming Home">
             </div>
         </div>
     </div>
 
     <div id="travel" class="page-sheet">
-        <h2 style="text-align: center; font-family: 'Cormorant Garamond'; font-size: 2.2rem; color: var(--navy); margin-bottom: 25px;">Venue Details</h2>
+        <h2 style="text-align: center; font-family: 'Cormorant Garamond'; font-size: 2.5rem; color: var(--navy); margin-bottom: 30px;">Venue Details</h2>
         <div class="travel-grid-container">
             <div class="luxury-card" style="max-width: 100%; margin: 10px;">
-                <span style="color: var(--gold); font-size: 0.6rem; letter-spacing: 3px; font-weight: 600;">THE CEREMONY</span>
-                <h3 style="font-family: 'Cormorant Garamond'; font-size: 1.6rem; margin: 10px 0;">Hampi Functional Hall</h3>
-                <p style="font-size: 0.85rem; opacity: 0.8;">Tirumala, Andhra Pradesh</p>
-                <iframe class="google-map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3877.3!2d79.3!3d13.6!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDM2JzAwLjAiTiA3OcKwMTgnMDAuMCJF!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
+                <span style="color: var(--gold); font-size: 0.65rem; letter-spacing: 3px; font-weight: 600;">THE CEREMONY</span>
+                <h3 style="font-family: 'Cormorant Garamond'; font-size: 1.8rem; margin: 10px 0;">Hampi Functional Hall</h3>
+                <p style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 15px;">Tirumala, Andhra Pradesh</p>
+                <iframe class="google-map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15551.48831627916!2d79.33649515!3d13.6745108!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a4d46d03099955d%3A0xc39f28d8b9826a79!2sTirumala%2C%20Andhra%20Pradesh!5e0!3m2!1sen!2sin!4v1714030000000!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
             </div>
 
             <div class="luxury-card" style="max-width: 100%; margin: 10px;">
-                <span style="color: var(--gold); font-size: 0.6rem; letter-spacing: 3px; font-weight: 600;">THE RECEPTION</span>
-                <h3 style="font-family: 'Cormorant Garamond'; font-size: 1.6rem; margin: 10px 0;">Hotel Daspalla</h3>
-                <p style="font-size: 0.85rem; opacity: 0.8;">Jagadamba Junction, Visakhapatnam</p>
-                <iframe class="google-map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3800.7!2d83.3!3d17.7!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTfCsDQyJzAwLjAiTiA4M8KwMTgnMDAuMCJF!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
+                <span style="color: var(--gold); font-size: 0.65rem; letter-spacing: 3px; font-weight: 600;">THE CELEBRATION</span>
+                <h3 style="font-family: 'Cormorant Garamond'; font-size: 1.8rem; margin: 10px 0;">Hotel Daspalla</h3>
+                <p style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 15px;">Jagadamba Junction, Visakhapatnam</p>
+                <iframe class="google-map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3800.7027415446054!2d83.3005886!3d17.7115169!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a394317f22557e1%3A0x600b3e6e88d1d86e!2sHotel%20Daspalla!5e0!3m2!1sen!2sin!4v1714030000000!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
             </div>
         </div>
     </div>
 
     <footer>
         <div class="pinyon">See you there! ❤️</div>
-        <p style="letter-spacing: 2px; font-size: 0.8rem; color: var(--cream); opacity: 0.9;">CONTACT: +91 70932 45918</p>
-        <p style="opacity: 0.4; font-size: 0.6rem; color: var(--cream); margin-top: 15px;">Made with ❤️ for Akhil & Gaayathri</p>
+        <p style="letter-spacing: 2px; font-size: 0.85rem; color: var(--cream); opacity: 0.9;">CONTACT: +91 70932 45918</p>
+        <p style="opacity: 0.4; font-size: 0.65rem; color: var(--cream); margin-top: 15px;">Made with ❤️ for Akhil & Gaayathri</p>
     </footer>
 
     <script>
         const music = document.getElementById('bgMusic');
         const intro = document.getElementById('intro');
 
-        // Opening Animation
         function startExperience(e) {
             e.stopPropagation();
             intro.classList.add('opened');
-            music.play().catch(() => console.log("Audio requires manual interaction"));
+            music.play().catch(() => console.log("Audio blocked"));
             
             setTimeout(() => { 
                 intro.style.opacity = '0';
@@ -305,13 +360,9 @@
                 setTimeout(() => { intro.style.display = 'none'; }, 1000);
             }, 1200);
 
-            // Explosion of hearts
-            for(let i=0; i<25; i++) {
-                setTimeout(() => createHeart(window.innerWidth/2, window.innerHeight/2), i * 50);
-            }
+            for(let i=0; i<30; i++) setTimeout(() => createHeart(window.innerWidth/2, window.innerHeight/2), i * 40);
         }
 
-        // Tab Navigation
         function showSheet(id) {
             document.querySelectorAll('.page-sheet').forEach(s => s.style.display = 'none');
             const target = document.getElementById(id);
@@ -319,34 +370,26 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Mobile Menu
         function toggleMenu() { document.getElementById('navLinks').classList.toggle('active'); }
-        function closeMenu(id) { 
-            document.getElementById('navLinks').classList.remove('active'); 
-            showSheet(id); 
-        }
+        function closeMenu(id) { document.getElementById('navLinks').classList.remove('active'); showSheet(id); }
 
-        // Background Drifting Hearts
         function spawnBackgroundHeart() {
             const container = document.getElementById('bgHearts');
             const heart = document.createElement('div');
             heart.className = 'drifting-heart';
             heart.innerHTML = '❤️';
             heart.style.left = Math.random() * 95 + 'vw';
-            heart.style.fontSize = (Math.random() * 12 + 8) + 'px';
-            const duration = Math.random() * 4 + 6;
+            heart.style.fontSize = (Math.random() * 15 + 10) + 'px';
+            const duration = Math.random() * 3 + 5;
             heart.style.animationDuration = duration + 's';
             container.appendChild(heart);
             setTimeout(() => heart.remove(), duration * 1000);
         }
-        setInterval(spawnBackgroundHeart, 500);
+        setInterval(spawnBackgroundHeart, 400);
 
-        // Click interaction hearts
         function createClickHeart(e) {
-            if(intro.style.display === 'none') {
-                for(let i=0; i<5; i++) {
-                    setTimeout(() => createHeart(e.clientX, e.clientY), i * 60);
-                }
+            for(let i=0; i<8; i++) {
+                setTimeout(() => createHeart(e.clientX, e.clientY), i * 80);
             }
         }
 
@@ -354,14 +397,13 @@
             const heart = document.createElement('div');
             heart.className = 'heart-fly';
             heart.innerHTML = '❤️';
-            heart.style.left = (x + (Math.random() - 0.5) * 60) + 'px';
+            heart.style.left = (x + (Math.random() - 0.5) * 80) + 'px';
             heart.style.top = y + 'px';
-            heart.style.fontSize = (Math.random() * 15 + 12) + 'px';
+            heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
             document.body.appendChild(heart);
             setTimeout(() => heart.remove(), 2500);
         }
 
-        // Countdown Logic
         const weddingDate = new Date("May 13, 2026 09:00:00").getTime();
         function updateCountdown() {
             const now = new Date().getTime();
@@ -375,7 +417,6 @@
         setInterval(updateCountdown, 1000);
         updateCountdown();
 
-        // Initialize
         window.onload = () => showSheet('home');
     </script>
 </body>
